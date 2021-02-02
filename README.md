@@ -14,4 +14,4 @@
 
 ***
 
-### Библиотека стилей: [Material-ui](https://material-ui.com/)
+### Библиотека стилей: [VK-UI](https://vkcom.github.io/VKUI/)

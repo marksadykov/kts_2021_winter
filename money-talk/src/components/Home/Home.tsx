@@ -1,6 +1,9 @@
 import * as React from 'react';
 import {Card, CardScroll, CellButton, Group, Panel, PanelHeader, Root, View} from "@vkontakte/vkui";
 import {useState} from "react";
+import CurrenciesTicker from "../CurrenciesTicker/CurrenciesTicker";
+
+
 
 const Home = () => {
 
@@ -15,8 +18,8 @@ const Home = () => {
                             <CardScroll size="s">
                                 <Card>
                                     <div style={{ paddingBottom: '66%' }}>
-                                        <CellButton onClick={ () => setActiveView('kek') }>
-                                            kek
+                                        <CellButton onClick={ () => setActiveView('currenciesTicker') }>
+                                            Currencies Ticker
                                         </CellButton>
                                     </div>
                                 </Card>
@@ -68,9 +71,9 @@ const Home = () => {
                         </CardScroll>
                     </Panel>
                 </View>
-                <View activePanel="card" id="kek">
+                <View activePanel="card" id="currenciesTicker">
                     <Panel id="card">
-                        <PanelHeader>CardScroll</PanelHeader>
+                        <CurrenciesTicker/>
                     </Panel>
                 </View>
                 <View activePanel="card" id="lol">

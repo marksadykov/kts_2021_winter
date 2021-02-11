@@ -32,7 +32,10 @@ const SimpleSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLEle
                 after={null}/>
                 {getMoney(search).length > 0 && getMoney(search).map((item: any) =>
                     <Cell onClick={ () => {
-                            props.currentCountry(item.name);
+                            props.currentCountry({
+                                country:item.name,
+                                value: item.value
+                            });
                             props.setActiveModal({
                                 homeValue: null,
                                 currentValue: ''

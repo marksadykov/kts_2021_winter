@@ -20,9 +20,25 @@ const Change = () => {
         currentValue: '',
     });
 
-    const [currentCountry, setCurrentCountry] = React.useState('');
+    const [currentCountry, setCurrentCountry] = React.useState({
+        country: '',
+        value: 0.0
+    });
+
+    const [currentCountry2, setCurrentCountry2] = React.useState({
+        country: '',
+        value: 0.0
+    });
 
     const [firstMoney, setFirstMoney] = React.useState('0');
+    const [secondMoney, setSecondMoney] = React.useState('0');
+
+    React.useEffect(
+        () => {
+            console.log('currentCountry', currentCountry);
+        },
+        [currentCountry, currentCountry2],
+    );
 
     const modal = (
         <ModalRoot
@@ -30,6 +46,12 @@ const Change = () => {
         >
             <ModalPage
                 id={'countries'}
+                onClose={() => {
+                    setActiveModal({
+                        homeValue: null,
+                        currentValue: ''
+                    });
+                }}
                 header={
                     <ModalPageHeader
                         left={
@@ -68,6 +90,53 @@ const Change = () => {
                     />
                 </Group>
             </ModalPage>
+
+            <ModalPage
+                id={'countries2'}
+                onClose={() => {
+                    setActiveModal({
+                        homeValue: null,
+                        currentValue: ''
+                    });
+                }}
+                header={
+                    <ModalPageHeader
+                        left={
+                            <PanelHeaderBack label="Назад"
+                                             onClick={() => {
+                                                 setActiveModal({
+                                                     homeValue: null,
+                                                     currentValue: ''
+                                                 });
+                                             }}
+                            />
+                        }
+                        right={
+                            IS_PLATFORM_IOS &&
+                            <PanelHeaderButton
+                                onClick={() => {
+                                    setActiveModal({
+                                        homeValue: null,
+                                        currentValue: ''
+                                    });
+                                }}
+                            >
+                                <Icon24Dismiss />
+                            </PanelHeaderButton>
+                        }
+                    >
+                        Выберите валюту
+                    </ModalPageHeader>
+                }
+                settlingHeight={80}
+            >
+                <Group>
+                    <Search
+                        currentCountry={setCurrentCountry2}
+                        setActiveModal={setActiveModal}
+                    />
+                </Group>
+            </ModalPage>
         </ModalRoot>
     );
 
@@ -76,17 +145,30 @@ const Change = () => {
         <View activePanel="modals" modal={modal}>
             <Panel id="modals">
                 <Group header={<Header mode="secondary">Валюта 1</Header>}>
-                    <FormItem top="Количество">
+                    <FormItem top="Количество валюты 1">
                         <Input value={String(firstMoney)} onChange={e => setFirstMoney(e.target.value)} type="number"/>
                     </FormItem>
-                    <FormItem top="Выберите страну">
+                    <FormItem top="Выберите валюту 1">
                         <SelectMimicry
                             placeholder="Не выбрана"
                             onClick={() => setActiveModal({
                                 homeValue: null,
                                 currentValue: 'countries'
                             })}
-                        >{currentCountry}
+                        >{currentCountry.country}
+                        </SelectMimicry>
+                    </FormItem>
+                    <FormItem top="Количество валюты 2">
+                        <Input value={String(secondMoney)} onChange={e => setSecondMoney(e.target.value)} type="number"/>
+                    </FormItem>
+                    <FormItem top="Выберите валюту 2">
+                        <SelectMimicry
+                            placeholder="Не выбрана"
+                            onClick={() => setActiveModal({
+                                homeValue: null,
+                                currentValue: 'countries2'
+                            })}
+                        >{currentCountry2.country}
                         </SelectMimicry>
                     </FormItem>
                 </Group>

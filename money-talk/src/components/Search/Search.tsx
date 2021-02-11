@@ -1,73 +1,66 @@
 import * as React from 'react';
-
 import {
     Cell,
     Footer,
-    Group,
-    PanelHeader,
-    PanelHeaderButton,
-    Search,
+    Group, Panel,
+    Search, SizeType,
+    View
 } from "@vkontakte/vkui";
-import {Icon28AddOutline} from "@vkontakte/icons";
 
-const thematics = [
-    {id: 3201, name: "Аренда автомобилей"},
-    {id: 3273, name: "Автотовары"},
-    {id: 3205, name: "Автосалон"},
-    {id: 3282, name: "Автосервис"},
-    {id: 3283, name: "Услуги для автовладельцев"},
-    {id: 3284, name: "Велосипеды"},
-    {id: 3285, name: "Мотоциклы и другая мототехника"},
-    {id: 3286, name: "Водный транспорт"},
-    {id: 3287, name: "Автопроизводитель"},
-    {id: 3288, name: "Автомойка"},
-    {id: 3117, name: "Автошкола"},
-    {id: 3118, name: "Детский сад"},
-    {id: 3119, name: "Гимназия"},
-    {id: 3120, name: "Колледж"},
-    {id: 3121, name: "Лицей"},
-    {id: 3122, name: "Техникум"},
-    {id: 3123, name: "Университет"},
-    {id: 3124, name: "Школа"},
-    {id: 3125, name: "Институт"},
-    {id: 3126, name: "Обучающие курсы"},
-    {id: 3276, name: "Дополнительное образование"},
-    {id: 3275, name: "Тренинг, семинар"},
-    {id: 3127, name: "Танцевальная школа"}
+const money = [
+    {id: 1, name: "Рубль", value: 65.75},
+    {id: 2, name: "Доллар", value: 1.0},
+    {id: 3, name: "Евро", value: 0.75},
 ];
 
+const getMoney = (search: string) => {
+    const searchValue = search.toLowerCase();
+    return money.filter(({name}) => name.toLowerCase().indexOf(searchValue) > -1);
+}
 
-
-const SearchGroup = () => {
+const SimpleSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined; sizeX: SizeType; platform: any;
+    currentCountry: any;
+    activeModal: any;}) =>  {
 
     const [search, setSearch] = React.useState('');
 
-    const getThematics () {
-        const searchThema = search.toLowerCase();
-        return thematics.filter(({name}) => name.toLowerCase().indexOf(searchThema) > -1);
-    }
-
     return (
         <>
-            <PanelHeader
-                right={
-                    <PanelHeaderButton
-                        // onClick={this.props.goHeaderSearch}
-                    >
-                        <Icon28AddOutline />
-                    </PanelHeaderButton>
-                }
-                // separator={this.props.sizeX === SizeType.REGULAR}
-            >
-                Выбор тематики
-            </PanelHeader>
             <Group>
-                <Search value={search} onChange={ e => setSearch(e.target.value)} after={null}/>
-                {thematics.length > 0 && thematics.map(item => <Cell key={item.id}>{item.name}</Cell>)}
-                {thematics.length === 0 && <Footer>Ничего не найдено</Footer>}
+                <Search value={search} onChange={(e: any) => {
+                        setSearch(e.target.value);
+                        props.currentCountry(e.target.value);
+                        props.activeModal({
+                            homeValue: null,
+                            currentValue: ''
+                        })
+                    }
+                }
+                after={null}/>
+                {getMoney(search).length > 0 && getMoney(search).map((item: any) => <Cell key={item.id}>{item.name}</Cell>)}
+                {getMoney(search).length === 0 && <Footer>Ничего не найдено</Footer>}
             </Group>
         </>
     );
 }
 
-export default SearchGroup;
+
+const SearchExample = (props: { sizeX?: any; platform?: any; currentCountry: any; activeModal: any;}) => {
+
+    const [activePanel, setActivePanel] = React.useState('search');
+
+    const { platform } = props;
+    return (
+        <View
+            activePanel={activePanel}
+        >
+            <Panel id="search">
+                <SimpleSearch currentCountry={props.currentCountry}
+                              activeModal={props.activeModal}
+                              sizeX={props.sizeX} goHeaderSearch={() => setActivePanel('header-search')} platform={platform} />
+            </Panel>
+        </View>
+    );
+}
+
+export default SearchExample;

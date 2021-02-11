@@ -2,6 +2,11 @@ import * as React from 'react';
 import {Card, CardScroll, CellButton, Group, Panel, PanelHeader, Root, View} from "@vkontakte/vkui";
 import {useState} from "react";
 
+import styles from './Home.module.scss';
+import {ReactSVG} from "react-svg";
+import iconExchange from './icons/exchange.svg'
+import Change from "../Change";
+
 const Home = () => {
 
     const [activeView, setActiveView] = useState('home');
@@ -10,25 +15,23 @@ const Home = () => {
             <Root activeView={activeView}>
                 <View activePanel="card" id="home">
                     <Panel id="card">
-                        <PanelHeader>CardScroll</PanelHeader>
-                        <Group description="Внутри Group">
+                        <PanelHeader>Money talk</PanelHeader>
+                        <Group description="Опции">
                             <CardScroll size="s">
                                 <Card>
-                                    <div style={{ paddingBottom: '66%' }}>
-                                        <CellButton onClick={ () => setActiveView('kek') }>
-                                            kek
-                                        </CellButton>
-                                    </div>
+                                    <CellButton style={{ height: 150 }} onClick={ () => setActiveView('change') }>
+                                        <ReactSVG
+                                            src={iconExchange}
+                                            className={styles.svgicon}
+                                        />
+                                    </CellButton>
+                                </Card>
+                                <Card>
+
                                 </Card>
                                 <Card>
                                     <div style={{ paddingBottom: '66%' }}>
-                                        <CellButton onClick={ () => setActiveView('lol') }>
-                                            lol
-                                        </CellButton>
                                     </div>
-                                </Card>
-                                <Card>
-                                    <div style={{ paddingBottom: '66%' }} />
                                 </Card>
                                 <Card>
                                     <div style={{ paddingBottom: '66%' }} />
@@ -68,12 +71,13 @@ const Home = () => {
                         </CardScroll>
                     </Panel>
                 </View>
-                <View activePanel="card" id="kek">
+                <View activePanel="card" id="change">
                     <Panel id="card">
-                        <PanelHeader>CardScroll</PanelHeader>
+                        <PanelHeader>Конвертер</PanelHeader>
+                        <Change />
                     </Panel>
                 </View>
-                <View activePanel="card" id="lol">
+                <View activePanel="card" id="graphic">
                     <Panel id="card">
                         <PanelHeader>lol</PanelHeader>
                     </Panel>

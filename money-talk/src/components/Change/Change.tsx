@@ -20,7 +20,7 @@ const Change = () => {
         currentValue: '',
     });
 
-    const [currentCountry, setCurrentCountry] = React.useState('Не выбрано');
+    const [currentCountry, setCurrentCountry] = React.useState('');
 
     const [firstMoney, setFirstMoney] = React.useState('0');
 
@@ -64,7 +64,7 @@ const Change = () => {
                 <Group>
                     <Search
                         currentCountry={setCurrentCountry}
-                        activeModal={setActiveModal}
+                        setActiveModal={setActiveModal}
                     />
                 </Group>
             </ModalPage>

@@ -20,24 +20,27 @@ const getMoney = (search: string) => {
 
 const SimpleSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined; sizeX: SizeType; platform: any;
     currentCountry: any;
-    activeModal: any;}) =>  {
+    setActiveModal: any;}) =>  {
 
     const [search, setSearch] = React.useState('');
 
     return (
         <>
             <Group>
-                <Search value={search} onChange={(e: any) => {
-                        setSearch(e.target.value);
-                        props.currentCountry(e.target.value);
-                        props.activeModal({
-                            homeValue: null,
-                            currentValue: ''
-                        })
-                    }
+                <Search value={search} onChange={(e: any) => {setSearch(e.target.value)}
                 }
                 after={null}/>
-                {getMoney(search).length > 0 && getMoney(search).map((item: any) => <Cell key={item.id}>{item.name}</Cell>)}
+                {getMoney(search).length > 0 && getMoney(search).map((item: any) =>
+                    <Cell onClick={ () => {
+                            props.currentCountry(item.name);
+                            props.setActiveModal({
+                                homeValue: null,
+                                currentValue: ''
+                            })
+                        }
+                    }
+                    key={item.id}>{item.name}</Cell>
+                )}
                 {getMoney(search).length === 0 && <Footer>Ничего не найдено</Footer>}
             </Group>
         </>
@@ -45,7 +48,7 @@ const SimpleSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLEle
 }
 
 
-const SearchExample = (props: { sizeX?: any; platform?: any; currentCountry: any; activeModal: any;}) => {
+const SearchExample = (props: { sizeX?: any; platform?: any; currentCountry: any; setActiveModal: any;}) => {
 
     const [activePanel, setActivePanel] = React.useState('search');
 
@@ -56,7 +59,7 @@ const SearchExample = (props: { sizeX?: any; platform?: any; currentCountry: any
         >
             <Panel id="search">
                 <SimpleSearch currentCountry={props.currentCountry}
-                              activeModal={props.activeModal}
+                              setActiveModal={props.setActiveModal}
                               sizeX={props.sizeX} goHeaderSearch={() => setActivePanel('header-search')} platform={platform} />
             </Panel>
         </View>

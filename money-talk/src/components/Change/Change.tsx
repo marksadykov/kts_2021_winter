@@ -158,9 +158,6 @@ const Change = (props: {setActiveView: any}) => {
         <View activePanel="modals" modal={modal}>
             <Panel id="modals">
                 <Group header={<Header onClick={() => props.setActiveView('home')} mode="secondary">Назад</Header>}>
-                    <FormItem top="Количество валюты 1">
-                        <Input value={String(firstMoney)} onChange={e => setFirstMoney(Number(e.target.value))} type="number"/>
-                    </FormItem>
                     <FormItem top="Выберите валюту 1">
                         <SelectMimicry
                             placeholder="Не выбрана"
@@ -171,8 +168,8 @@ const Change = (props: {setActiveView: any}) => {
                         >{currentCountry.country}
                         </SelectMimicry>
                     </FormItem>
-                    <FormItem top="Количество валюты 2">
-                        <Input value={secondMoney} type="string" disabled/>
+                    <FormItem top="Количество валюты 1">
+                        <Input value={String(firstMoney)} onChange={e => setFirstMoney(Number(e.target.value))} type="number"/>
                     </FormItem>
                     <FormItem top="Выберите валюту 2">
                         <SelectMimicry
@@ -183,6 +180,9 @@ const Change = (props: {setActiveView: any}) => {
                             })}
                         >{currentCountry2.country}
                         </SelectMimicry>
+                    </FormItem>
+                    <FormItem top="Количество валюты 2">
+                        <Input value={secondMoney} type="string" disabled/>
                     </FormItem>
                 </Group>
             </Panel>

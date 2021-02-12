@@ -6,6 +6,7 @@ import styles from './Home.module.scss';
 import {ReactSVG} from "react-svg";
 import iconExchange from './icons/exchange.svg'
 import Change from "../Change";
+import Chart from "../Chart";
 
 const Home = () => {
 
@@ -69,6 +70,7 @@ const Home = () => {
                                 <div style={{ paddingBottom: '29%' }} />
                             </Card>
                         </CardScroll>
+                        <Chart />
                     </Panel>
                 </View>
                 <View activePanel="card" id="change">

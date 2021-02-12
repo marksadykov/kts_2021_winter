@@ -48,7 +48,6 @@ const Change = (props: {setActiveView: any}) => {
     React.useEffect(
         () => {
             setSecondMoney(String(calculateValue(firstMoney, currentCountry, currentCountry2)));
-            console.log(calculateValue(firstMoney, currentCountry, currentCountry2));
         },
         [firstMoney, currentCountry, currentCountry2],
     );

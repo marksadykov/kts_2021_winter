@@ -6,61 +6,64 @@ import {
     CartesianGrid,
     Line,
 } from 'recharts';
+import useWindowSize from "../../utils/useWindowSize";
 
 const data = [
     {
-        name: 'Page A',
-        uv: 4000,
-        pv: 2400,
+        date: 'Page A',
+        Рубль: 4000,
+        Евро: 2400,
     },
     {
-        name: 'Page B',
-        uv: 3000,
-        pv: 1398,
+        date: 'Page B',
+        Рубль: 3000,
+        Евро: 1398,
     },
     {
-        name: 'Page C',
-        uv: 2000,
-        pv: 9800,
+        date: 'Page C',
+        Рубль: 2000,
+        Евро: 9800,
     },
     {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
+        date: 'Page D',
+        Рубль: 2780,
+        Евро: 3908,
     },
     {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
+        date: 'Page E',
+        Рубль: 1890,
+        Евро: 4800,
     },
     {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
+        date: 'Page F',
+        Рубль: 2390,
+        Евро: 3800,
     },
     {
-        name: 'Page G',
-        uv: 3490,
-        pv: 4300,
+        date: '12.02',
+        Рубль: 3490,
+        Евро: 4300,
     },
 ];
 
-const MyChart = () => {
+const MainChart = () => {
+
+    const screenWidth = useWindowSize();
 
     return (
         <LineChart
-            width={360}
+            width={screenWidth.width}
             height={300}
             data={data}
             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
         >
-            <XAxis dataKey="name" />
+            <XAxis dataKey="date" />
             <Tooltip />
             <CartesianGrid stroke="#f5f5f5" />
-            <Line type="monotone" dataKey="uv" stroke="#ff7300" yAxisId={0} />
-            <Line type="monotone" dataKey="pv" stroke="#387908" yAxisId={1} />
+            <Line type="monotone" dataKey="Рубль" stroke="#ff7300" yAxisId={0} />
+            <Line type="monotone" dataKey="Евро" stroke="#387908" yAxisId={1} />
         </LineChart>
     );
 }
 
-export default MyChart;
+export default MainChart;

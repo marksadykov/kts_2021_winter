@@ -13,6 +13,18 @@ import {
 import Search from "../Search";
 import {Icon24Dismiss} from "@vkontakte/icons";
 
+const calculateValue = (firstValue: number, firstCountry: { country?: string; value: any; }, secondCountry: { country?: string; value: any; }) => {
+    // ерво\доллар = 0.75 \1 => евро = 0.75 * доллар
+    //
+    // рубль\доллар = 65 \1 => доллар = рубль / 65
+    //
+    // евро = 0.75 * (рубль / 65)
+
+    const secondValue = String(secondCountry.value * (firstValue / firstCountry.value));
+
+    return (secondValue === 'NaN' ? '' : secondValue);
+}
+
 const Change = () => {
 
     const [activeModal, setActiveModal] = React.useState({
@@ -30,14 +42,15 @@ const Change = () => {
         value: 0.0
     });
 
-    const [firstMoney, setFirstMoney] = React.useState('0');
-    const [secondMoney, setSecondMoney] = React.useState('0');
+    const [firstMoney, setFirstMoney] = React.useState(0);
+    const [secondMoney, setSecondMoney] = React.useState('');
 
     React.useEffect(
         () => {
-            console.log('currentCountry', currentCountry);
+            setSecondMoney(String(calculateValue(firstMoney, currentCountry, currentCountry2)));
+            console.log(calculateValue(firstMoney, currentCountry, currentCountry2));
         },
-        [currentCountry, currentCountry2],
+        [firstMoney, currentCountry, currentCountry2],
     );
 
     const modal = (
@@ -144,9 +157,9 @@ const Change = () => {
 
         <View activePanel="modals" modal={modal}>
             <Panel id="modals">
-                <Group header={<Header mode="secondary">Валюта 1</Header>}>
+                <Group header={<Header mode="secondary">Валюта</Header>}>
                     <FormItem top="Количество валюты 1">
-                        <Input value={String(firstMoney)} onChange={e => setFirstMoney(e.target.value)} type="number"/>
+                        <Input value={String(firstMoney)} onChange={e => setFirstMoney(Number(e.target.value))} type="number"/>
                     </FormItem>
                     <FormItem top="Выберите валюту 1">
                         <SelectMimicry
@@ -159,7 +172,7 @@ const Change = () => {
                         </SelectMimicry>
                     </FormItem>
                     <FormItem top="Количество валюты 2">
-                        <Input value={String(secondMoney)} onChange={e => setSecondMoney(e.target.value)} type="number"/>
+                        <Input value={String(secondMoney)} type="string" disabled/>
                     </FormItem>
                     <FormItem top="Выберите валюту 2">
                         <SelectMimicry

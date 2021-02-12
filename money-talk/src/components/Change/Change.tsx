@@ -25,7 +25,7 @@ const calculateValue = (firstValue: number, firstCountry: { country?: string; va
     return (secondValue === 'NaN' ? '' : secondValue);
 }
 
-const Change = () => {
+const Change = (props: {setActiveView: any}) => {
 
     const [activeModal, setActiveModal] = React.useState({
         homeValue: null,
@@ -157,7 +157,7 @@ const Change = () => {
 
         <View activePanel="modals" modal={modal}>
             <Panel id="modals">
-                <Group header={<Header mode="secondary">Валюта</Header>}>
+                <Group header={<Header onClick={() => props.setActiveView('home')} mode="secondary">Назад</Header>}>
                     <FormItem top="Количество валюты 1">
                         <Input value={String(firstMoney)} onChange={e => setFirstMoney(Number(e.target.value))} type="number"/>
                     </FormItem>
@@ -172,7 +172,7 @@ const Change = () => {
                         </SelectMimicry>
                     </FormItem>
                     <FormItem top="Количество валюты 2">
-                        <Input value={String(secondMoney)} type="string" disabled/>
+                        <Input value={secondMoney} type="string" disabled/>
                     </FormItem>
                     <FormItem top="Выберите валюту 2">
                         <SelectMimicry

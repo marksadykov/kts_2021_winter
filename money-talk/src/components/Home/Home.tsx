@@ -74,7 +74,7 @@ const Home = () => {
                 <View activePanel="card" id="change">
                     <Panel id="card">
                         <PanelHeader>Конвертер</PanelHeader>
-                        <Change />
+                        <Change setActiveView={setActiveView} />
                     </Panel>
                 </View>
                 <View activePanel="card" id="graphic">

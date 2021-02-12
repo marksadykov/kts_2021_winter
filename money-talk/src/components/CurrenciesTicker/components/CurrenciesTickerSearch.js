@@ -14,11 +14,14 @@ import ApiService from "../../../store/ApiService";
 import Loading from "./Loading";
 import Image from "./Image";
 import ListCurrenciesTicker from "./ListCurrenciesTicker";
+import {useLocal} from "../../../utils/useLocal";
 
 const CurrenciesTickerSearch = (props) => {
     const [search, setSearch] = useState('')
     const onChange = (e) =>  { setSearch(e.target.value); }
     const data = ApiService();
+
+    //const store = useLocal(() => new GithubReposStore());
 
     /*const [pressButton, setPressButton] = useState('false')
 

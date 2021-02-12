@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import {apiResponseTest} from "../config/constants";
+import {apiUrls} from "../config/apiUrls";
 
 
 const ApiService = () => {
@@ -10,7 +11,7 @@ const ApiService = () => {
         const makeRequest = async () => {
             const response = await axios({
                 method: 'get',
-                url: apiResponseTest
+                url: apiUrls.currency.nameResponse('currencies/ticker')
             });
             setData(response.data)
         }

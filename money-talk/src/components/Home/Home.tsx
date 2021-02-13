@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Card, CardScroll, CellButton, Group, Panel, PanelHeader, Root, View} from "@vkontakte/vkui";
-import {useState} from "react";
 
 import styles from './Home.module.scss';
 import {ReactSVG} from "react-svg";
@@ -10,7 +9,7 @@ import Chart from "../Chart";
 
 const Home = () => {
 
-    const [activeView, setActiveView] = useState('home');
+    const [activeView, setActiveView] = React.useState('home');
 
     return (
             <Root activeView={activeView}>

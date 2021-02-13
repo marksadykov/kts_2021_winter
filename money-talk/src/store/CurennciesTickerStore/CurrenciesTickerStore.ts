@@ -1,19 +1,23 @@
 import {GetCurrenciesTickerModel} from "../models/currency";
 import {Meta} from "../../utils/Meta";
-import {action, makeObservable, observable,} from 'mobx';
+import {action, computed, makeObservable, observable, runInAction,} from 'mobx';
 import {requestCurrenciesTicker} from "./requestCurrenciesTicker";
+import {CollectionT} from "../../utils/collection";
 
 
 export class CurrenciesTickerStore {
-    repos: GetCurrenciesTickerModel[] = [];
-    meta: Meta = Meta.initial;
+    _repos: CollectionT<number, GetCurrenciesTickerModel> = {
+        order: [],
+        entities: []
+    }
+    meta: Meta = Meta.initial
 
     constructor() {
         makeObservable(this, {
-            repos: observable,
+            _repos: observable,
             meta: observable,
             fetch: action.bound,
-            _setSuccessData: action
+            repos: computed
         })
     }
 
@@ -23,7 +27,10 @@ export class CurrenciesTickerStore {
         }
 
         this.meta = Meta.loading;
-        this.repos = [];
+        this._repos = {
+            order: [],
+            entities: {}
+        };
 
         const { isError, data } = await requestCurrenciesTicker('currencies/ticker')
         if (isError) {
@@ -31,11 +38,14 @@ export class CurrenciesTickerStore {
             return ;
         }
 
-        this._setSuccessData(data);
+        runInAction(() => {
+            this.meta = Meta.success
+            this._repos = data;
+        })
     }
 
-    _setSuccessData(repos: GetCurrenciesTickerModel[]): void {
-        this.meta = Meta.success
-        this.repos = repos;
+    get repos(): GetCurrenciesTickerModel[] {
+        return this._repos.order.map(id => this._repos.entities[id])
     }
+
 }

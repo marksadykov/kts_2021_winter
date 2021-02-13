@@ -1,5 +1,16 @@
 import * as React from 'react';
-import {Card, CardScroll, CellButton, Group, Panel, PanelHeader, Root, View} from "@vkontakte/vkui";
+import {
+    Card,
+    CardGrid,
+    CardScroll,
+    CellButton,
+    ContentCard,
+    Group,
+    Panel,
+    PanelHeader,
+    Root,
+    View
+} from "@vkontakte/vkui";
 
 import styles from './Home.module.scss';
 import {ReactSVG} from "react-svg";
@@ -69,7 +80,15 @@ const Home = () => {
                                 <div style={{ paddingBottom: '29%' }} />
                             </Card>
                         </CardScroll>
-                        <Chart />
+                        <Group description="Динамика Рубля и Евро">
+                            <CardGrid size={"l"}>
+                                <Card
+                                    mode="shadow"
+                                >
+                                    <Chart />
+                                </Card>
+                            </CardGrid>
+                        </Group>
                     </Panel>
                 </View>
                 <View activePanel="card" id="change">

@@ -7,6 +7,8 @@ import {
     Line,
 } from 'recharts';
 import useWindowSize from "../../utils/useWindowSize";
+import styles from './Chart.module.scss';
+import {Title} from "@vkontakte/vkui";
 
 const data = [
     {
@@ -26,23 +28,13 @@ const data = [
     },
     {
         date: 'Page D',
-        Рубль: 2780,
-        Евро: 3908,
+        Рубль: 2000,
+        Евро: 9800,
     },
     {
         date: 'Page E',
-        Рубль: 1890,
-        Евро: 4800,
-    },
-    {
-        date: 'Page F',
-        Рубль: 2390,
-        Евро: 3800,
-    },
-    {
-        date: '12.02',
-        Рубль: 3490,
-        Евро: 4300,
+        Рубль: 2000,
+        Евро: 9800,
     },
 ];
 
@@ -51,19 +43,28 @@ const MainChart = () => {
     const screenWidth = useWindowSize();
 
     return (
-        <LineChart
-            width={screenWidth.width}
-            height={300}
-            data={data}
-            margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-        >
-            <XAxis dataKey="date" />
-            <Tooltip />
-            <CartesianGrid stroke="#f5f5f5" />
-            <Line type="monotone" dataKey="Рубль" stroke="#ff7300" yAxisId={0} />
-            <Line type="monotone" dataKey="Евро" stroke="#387908" yAxisId={1} />
-        </LineChart>
+        <div className={styles.chartStyle}>
+            <Title level="3" weight="bold" style={{
+                marginBottom: 8,
+                marginTop: 8,
+                marginLeft: '5%',
+                marginRight: '5%' }}
+            >
+                Динамика рубля и евро
+            </Title>
+            <LineChart
+                width={screenWidth.width-40}
+                height={300}
+                data={data}
+            >
+                <XAxis dataKey="date" tick={{ fill: '#818c99', fontSize: 13 }}/>
+                <Tooltip wrapperStyle={{ fontSize: 13 }}/>
+                <CartesianGrid stroke="#f5f5f5" />
+                <Line type="monotone" dataKey="Рубль" stroke="#ff7300" yAxisId={0} />
+                <Line type="monotone" dataKey="Евро" stroke="#387908" yAxisId={1} />
+            </LineChart>
+        </div>
     );
-}
+};
 
 export default MainChart;

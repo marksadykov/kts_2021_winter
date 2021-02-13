@@ -15,6 +15,8 @@ import {Icon24Filter} from "@vkontakte/icons";
 import ApiService from "../../../store/ApiService";
 import Loading from "./Loading";
 import CurrenciesMathFloor from "../../../utils/utils";
+import {useLocal} from "../../../utils/useLocal";
+import {CurrenciesTickerStore} from "../../../store/CurennciesTickerStore/CurrenciesTickerStore";
 
 
 const CurrenciesTickerFilter = (props) => {
@@ -26,7 +28,6 @@ const CurrenciesTickerFilter = (props) => {
     if (data === null) {
         return <Loading/>
     }
-
 
     return (
         <React.Fragment>

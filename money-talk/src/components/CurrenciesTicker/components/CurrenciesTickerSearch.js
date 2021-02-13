@@ -15,11 +15,18 @@ import Loading from "./Loading";
 import Image from "./Image";
 import ListCurrenciesTicker from "./ListCurrenciesTicker";
 import {useLocal} from "../../../utils/useLocal";
+import {CurrenciesTickerStore} from "../../../store/CurennciesTickerStore/CurrenciesTickerStore";
+import {useAsync} from "../../../utils/useAsync";
+import {observer} from "mobx-react-lite";
 
 const CurrenciesTickerSearch = (props) => {
     const [search, setSearch] = useState('')
     const onChange = (e) =>  { setSearch(e.target.value); }
     const data = ApiService();
+    const store = useLocal(() => new CurrenciesTickerStore())
+
+    useAsync(store.fetch, []);
+
 
     //const store = useLocal(() => new GithubReposStore());
 
@@ -33,6 +40,7 @@ const CurrenciesTickerSearch = (props) => {
     if (data === null) {
         return <Loading/>
     }
+    console.log('store',store.repos.map(data => data.id))
 
 
     console.log(data.map(function (name) {
@@ -58,9 +66,9 @@ const CurrenciesTickerSearch = (props) => {
                        return name.id
                     }).filter(value => value.indexOf(search) > -1), '1')*/}
                     {/*!!! Как сделать строкой ниже, чтобы это работала также, как сверху !!! У меня не получается никак обработать нижний регистр. Выдает ошибку*/}
-                {data.length > 0 && data.filter((value) => value.name.indexOf(search) > -1).map(data =>
+                {store.repos.length > 0 && store.repos.filter((value) => value.name.indexOf(search) > -1).map(data =>
                     <SimpleCell key={data.id}>
-                        <Image response={data}/>
+                        {/*<Image response={data}/>*/}
                         <ListCurrenciesTicker response={data} />
                     </SimpleCell>)
                 }
@@ -70,4 +78,4 @@ const CurrenciesTickerSearch = (props) => {
     );
 }
 
-export default CurrenciesTickerSearch;
+export default observer(CurrenciesTickerSearch);

@@ -7,7 +7,7 @@ const ListCurrenciesTicker = ({response}) => {
 
     return (
         <>
-            {response.name} {CurrenciesMathFloor(response.price)}
+            {response.id} {CurrenciesMathFloor(response.price)}
         </>
     )
 }

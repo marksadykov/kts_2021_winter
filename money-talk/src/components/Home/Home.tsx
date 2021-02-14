@@ -4,7 +4,6 @@ import {
     CardGrid,
     CardScroll,
     CellButton,
-    ContentCard,
     Group,
     Panel,
     PanelHeader,
@@ -17,6 +16,8 @@ import {ReactSVG} from "react-svg";
 import iconExchange from './icons/exchange.svg'
 import Change from "../Change";
 import Chart from "../Chart";
+
+import useData from "../../store/useData";
 
 const Home = () => {
 
@@ -80,11 +81,9 @@ const Home = () => {
                                 <div style={{ paddingBottom: '29%' }} />
                             </Card>
                         </CardScroll>
-                        <Group description="Динамика Рубля и Евро">
+                        <Group description="в Долларах">
                             <CardGrid size={"l"}>
-                                <Card
-                                    mode="shadow"
-                                >
+                                <Card mode="shadow">
                                     <Chart />
                                 </Card>
                             </CardGrid>

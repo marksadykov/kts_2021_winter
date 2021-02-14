@@ -10,8 +10,7 @@ import useWindowSize from "../../utils/useWindowSize";
 import styles from './Chart.module.scss';
 import {Title} from "@vkontakte/vkui";
 import useData from "../../store/useData";
-import config from "../../config/constants";
-import {useState} from "react";
+import makeInterval from "./utils/makeInterval";
 
 const clearData: {date: string, Доллары: number}[] = [
     {
@@ -22,13 +21,15 @@ const clearData: {date: string, Доллары: number}[] = [
 
 const MainChart = () => {
 
-    const [timeToRender, setTimeToRender] = useState(0);
+    const [timeToRender, setTimeToRender] = React.useState(0);
 
     const screenWidth = useWindowSize();
 
+    const [start, end] = makeInterval();
+
     const data = useData('volume/history',
-        '2021-02-11T20%3A00%3A00Z',
-        '2021-02-12T00%3A00%3A00Z');
+        start,
+        end);
 
     React.useEffect(() => {
         data.forEach((item: {timestamp: string, volume: string}) => {
@@ -38,7 +39,7 @@ const MainChart = () => {
             };
             clearData.push(current);
         });
-        ( clearData.length > 0 ) ? clearData.shift() : console.log() ;
+        clearData.length > 1 && clearData.shift();
         setTimeToRender(timeToRender => timeToRender + 1);
     }, [data]);
 

@@ -17,15 +17,19 @@ import Loading from "./Loading";
 import CurrenciesMathFloor from "../../../utils/utils";
 import {useLocal} from "../../../utils/useLocal";
 import {CurrenciesTickerStore} from "../../../store/CurennciesTickerStore/CurrenciesTickerStore";
+import {useAsync} from "../../../utils/useAsync";
+import {Meta} from "../../../utils/Meta";
 
 
-const CurrenciesTickerFilter = (props) => {
+const CurrenciesTickerFilter = (props: { filterSlide?: any; platform?: any; sizeX?: any; goSearch?: any; onFiltersClick?: any; hideModal: any }) => {
     const [search, setSearch] = React.useState('')
-    const onChange = (e) =>  { setSearch(e.target.value); }
-    const data = ApiService();
+    const onChange = (e: { target: { value: React.SetStateAction<string>; }; }) =>  { setSearch(e.target.value); }
     const { platform, sizeX, goSearch, onFiltersClick } = props;
+    const store = useLocal(() => new CurrenciesTickerStore())
 
-    if (data === null) {
+    useAsync(store.fetch, []);
+
+    if (store.meta === Meta.loading) {
         return <Loading/>
     }
 
@@ -44,17 +48,18 @@ const CurrenciesTickerFilter = (props) => {
                 />
             </PanelHeader>
             <Group>
-                {data.length > 0 && data.filter((value) => value.price > props.filterSlide).map(data =>
+                {store.repos.length > 0 && store.repos.filter((value) => value.price > props.filterSlide).map(data =>
                     <SimpleCell
-                        before={<Avatar size={40} src={data.logo_url} />}
+                        before={<Avatar size={40} src={data.logoUrl} />}
                         key={data.id}
                         onClick={goSearch}
                     >
                         {data.name} {CurrenciesMathFloor(data.price)}</SimpleCell>
-                    )
+                )
                 }
-                {data.length === 0 && <Footer>Ничего не найдено</Footer>}
+                {store.repos.length === 0 && <Footer>Ничего не найдено</Footer>}
             </Group>
+
         </React.Fragment>
     );
 }

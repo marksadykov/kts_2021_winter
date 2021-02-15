@@ -5,6 +5,7 @@ import CurrenciesTicker from "../CurrenciesTicker/CurrenciesTicker";
 
 
 
+
 const Home = () => {
 
     const [activeView, setActiveView] = useState('home');

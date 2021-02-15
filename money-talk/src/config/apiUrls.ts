@@ -8,4 +8,11 @@ export const apiUrls = {
         nameResponse: (name: string): string =>
             apiCurrenciesTicker(`${name}?key=${apiKey}&interval=1d,30d&convert=EUR&per-page=100&page=1`),
     },
+    graphics: {
+        nameResponse: (name: string): string =>
+            apiCurrenciesTicker(`${name}?key=${apiKey}&ids=BTC&start=2018-04-14T00%3A00%3A00Z&end=2018-05-14T00%3A00%3A00Z`),
+    }
 };
+
+
+// https://api.nomics.com/v1/currencies/sparkline?key=demo-b5d84e505a11969a7184f899fbb40ae1&ids=BTC&start=2018-04-14T00%3A00%3A00Z&end=2018-05-14T00%3A00%3A00Z

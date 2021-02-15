@@ -3,7 +3,7 @@ import {
     ANDROID, FormItem,
     Group, Input, IOS, ModalPage,
     ModalPageHeader, ModalRoot,
-    Panel, PanelHeaderButton, Slider, View,
+    Panel, PanelHeader, PanelHeaderBack, PanelHeaderButton, SizeType, Slider, Textarea, View, VKCOM,
     withAdaptivity,
     withPlatform
 } from "@vkontakte/vkui";
@@ -17,7 +17,7 @@ import CurrenciesTickerFilter from "./components/CurrenciesTickerFilter";
 const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActiveView: any}) => {
     const [activePanel, setActivePanel] = useState('search')
     const [activeModal, setActiveModal] = useState<null | string>(null)
-    const [filterSlider, setFilterSlider] = React.useState<any>(null);
+    const [filterSlider, setFilterSlider] = React.useState<any>(0);
     const goHeaderSearch = () => { setActivePanel('header-search') }
     const goHome = () => {setActivePanel('home')}
     const goSearch = () => { setActivePanel('home') }
@@ -27,44 +27,30 @@ const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActi
 
     console.log(platform)
     return (
-        <View
-            activePanel={activePanel}
-            modal={
-                <ModalRoot activeModal={activeModal}>
-                    <ModalPage
-                        id="filters"
-                        onClose={hideModal}
-                        header={
-                            <ModalPageHeader
-                                left={platform === ANDROID && <PanelHeaderButton onClick={hideModal}><Icon24Cancel /></PanelHeaderButton>}
-                                right={<PanelHeaderButton onClick={hideModal}>{platform === IOS ? 'Готово' : <Icon24Done />}</PanelHeaderButton>}
-                            >
-                                Фильтры
-                            </ModalPageHeader>
-                        }
-                    >
-                        <Group>
-                            <FormItem top="Simple 0, 10000]">
-                                <Slider
-                                    min={0}
-                                    max={10000}
-                                    value={Number(filterSlider)}
-                                    onChange={value => setFilterSlider(value)}
-                                />
-                            </FormItem>
-                            <FormItem>
-                                <Input
-                                    value={String(filterSlider)}
-                                    onChange={e => setFilterSlider(e.target.value)}
-                                    type="number"
-                                />
-                            </FormItem>
-                        </Group>
-                    </ModalPage>
-                </ModalRoot>
-            }
-        >
+        <View activePanel={activePanel}>
             <Panel id="search">
+                <PanelHeader
+                    left={platform !== VKCOM &&
+                    <PanelHeaderBack onClick={() => props.setActiveView('home')}  />}
+                    separator={props.sizeX === SizeType.REGULAR}
+                >
+                    Currencies Ticker
+                </PanelHeader>
+                    <FormItem top="Simple 0, 10000">
+                        <Slider
+                            min={0}
+                            max={10000}
+                            value={Number(filterSlider)}
+                            onChange={value => setFilterSlider(value)}
+                        />
+                    </FormItem>
+                    <FormItem>
+                        <Textarea
+                            value={String(Math.floor(filterSlider))}
+                            onChange={e => setFilterSlider(e.target.value)}
+                        />
+                    </FormItem>
+
                 <CurrenciesTickerSearch
                     sizeX={props.sizeX}
                     goHeaderSearch={goHeaderSearch}
@@ -76,15 +62,6 @@ const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActi
                     filterSlide={filterSlider}
                     setActiveView={props.setActiveView}
 
-                />
-            </Panel>
-            <Panel id="header-search">
-                <CurrenciesTickerFilter
-                    sizeX={props.sizeX}
-                    onFiltersClick={() => setActiveModal('filters')}
-                    goSearch={goSearch} platform={platform}
-                    hideModal={hideModal}
-                    filterSlide={filterSlider}
                 />
             </Panel>
         </View>

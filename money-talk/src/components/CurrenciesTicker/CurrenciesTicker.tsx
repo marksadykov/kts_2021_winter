@@ -14,8 +14,7 @@ import CurrenciesTickerSearch from "./components/CurrenciesTickerSearch";
 import CurrenciesTickerFilter from "./components/CurrenciesTickerFilter";
 
 
-const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; }) => {
-    const [activeView, setActiveView] = React.useState('home');
+const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActiveView: any}) => {
     const [activePanel, setActivePanel] = useState('search')
     const [activeModal, setActiveModal] = useState<null | string>(null)
     const [filterSlider, setFilterSlider] = React.useState<any>(null);
@@ -75,6 +74,7 @@ const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; }) => {
                     goSearch={goSearch}
                     hideModal={hideModal}
                     filterSlide={filterSlider}
+                    setActiveView={props.setActiveView}
 
                 />
             </Panel>

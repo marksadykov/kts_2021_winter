@@ -14,20 +14,20 @@ const Home = () => {
             <Root activeView={activeView}>
                 <View activePanel="card" id="home">
                     <Panel id="card">
-                        <PanelHeader>CardScroll</PanelHeader>
+                        <PanelHeader>Money Talk</PanelHeader>
                         <Group description="Внутри Group">
                             <CardScroll size="s">
                                 <Card>
                                     <div style={{ paddingBottom: '66%' }}>
-                                        <CellButton onClick={ () => setActiveView('currenciesTicker') }>
-                                            Currencies Ticker
+                                        <CellButton onClick={ () => setActiveView('lol') }>
+                                            lol
                                         </CellButton>
                                     </div>
                                 </Card>
                                 <Card>
                                     <div style={{ paddingBottom: '66%' }}>
-                                        <CellButton onClick={ () => setActiveView('lol') }>
-                                            lol
+                                        <CellButton onClick={ () => setActiveView('currenciesTicker') }>
+                                            currenciesTicker
                                         </CellButton>
                                     </div>
                                 </Card>
@@ -74,7 +74,7 @@ const Home = () => {
                 </View>
                 <View activePanel="card" id="currenciesTicker">
                     <Panel id="card">
-                        <CurrenciesTicker/>
+                        <CurrenciesTicker setActiveView={setActiveView}/>
                     </Panel>
                 </View>
                 <View activePanel="card" id="lol">

@@ -19,7 +19,7 @@ import CurrenciesMathFloor from "../../../utils/utils";
 import {Meta} from "../../../utils/Meta";
 import Loading from "./Loading";
 
-const CurrenciesTickerSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined; sizeX: SizeType; filterSlide?: any; platform?: any; goSearch?: any; onFiltersClick?: any; hideModal: any; goHome:any}) => {
+const CurrenciesTickerSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined; sizeX: SizeType; filterSlide?: any; platform?: any; goSearch?: any; onFiltersClick?: any; hideModal: any; goHome:any; setActiveView:any}) => {
     const [search, setSearch] = useState('')
     const onChange = (e: { target: { value: React.SetStateAction<string>; }; }) =>  { setSearch(e.target.value); }
     const { platform, sizeX, goSearch, onFiltersClick } = props;
@@ -36,7 +36,7 @@ const CurrenciesTickerSearch = (props: { goHeaderSearch: ((event: React.MouseEve
         <React.Fragment>
             <PanelHeader
                 left={platform !== VKCOM &&
-                <PanelHeaderBack onClick={props.goHome} />}
+                <PanelHeaderBack onClick={() => props.setActiveView('home')}  />}
                 separator={sizeX === SizeType.REGULAR}
             >
                 <Search

@@ -20,12 +20,12 @@ import {Meta} from "../../../utils/Meta";
 import Loading from "./Loading";
 import Example from "./CurrenciesTickerGraphics";
 
-const CurrenciesTickerSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined; sizeX: SizeType; filterSlide?: any; platform?: any; goSearch?: any; onFiltersClick?: any; hideModal: any; goHome:any; setActiveView:any}) => {
+const CurrenciesTickerSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined; sizeX: SizeType; filterSlide?: any; platform?: any; goSearch?: any; onFiltersClick?: any; setActiveView:any}) => {
     const [search, setSearch] = useState('')
     const onChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setSearch(e.target.value);
     }
-    const {platform, sizeX, goSearch, onFiltersClick} = props;
+    const {onFiltersClick} = props;
     const store = useLocal(() => new CurrenciesTickerStore())
 
     useAsync(store.fetch, []);
@@ -47,6 +47,7 @@ const CurrenciesTickerSearch = (props: { goHeaderSearch: ((event: React.MouseEve
                 {store.repos.filter(({name, price}) => name.toLowerCase().indexOf(search.toLowerCase()) > -1 && price > props.filterSlide).map(data =>
                     <SimpleCell key={data.id} before={<Avatar size={40} src={data.logoUrl}/>}>
                         {data.name} {CurrenciesMathFloor(data.price)}
+                        <Example/>
                     </SimpleCell>)
                 }
                 {store.repos.length === 0 && <Footer>Ничего не найдено</Footer>}

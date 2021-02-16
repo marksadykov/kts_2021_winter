@@ -19,13 +19,15 @@ const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActi
     const [activeModal, setActiveModal] = useState<null | string>(null)
     const [filterSlider, setFilterSlider] = React.useState<any>(0);
     const goHeaderSearch = () => { setActivePanel('header-search') }
-    const goHome = () => {setActivePanel('home')}
+    /*const goHome = () => {setActivePanel('home')}
     const goSearch = () => { setActivePanel('home') }
-    const hideModal = () => { setActiveModal(null) }
+    const hideModal = () => { setActiveModal(null) }*/
 
     const { platform } = props;
 
     console.log(platform)
+    console.log(activeModal)
+    console.log(filterSlider)
     return (
         <View activePanel={activePanel}>
             <Panel id="search">
@@ -54,11 +56,8 @@ const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActi
                 <CurrenciesTickerSearch
                     sizeX={props.sizeX}
                     goHeaderSearch={goHeaderSearch}
-                    goHome={goHome}
                     platform={platform}
                     onFiltersClick={() => setActiveModal('filters')}
-                    goSearch={goSearch}
-                    hideModal={hideModal}
                     filterSlide={filterSlider}
                     setActiveView={props.setActiveView}
 

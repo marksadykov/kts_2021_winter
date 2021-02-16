@@ -10,7 +10,7 @@ export const apiUrls = {
     },
     graphics: {
         nameResponse: (name: string): string =>
-            apiCurrenciesTicker(`${name}?key=${apiKey}&ids=BTC&start=2018-04-14T00%3A00%3A00Z&end=2018-05-14T00%3A00%3A00Z`),
+            apiCurrenciesTicker(`${name}?key=${apiKey}&ids=BTC,ETH,XRP&start=2021-01-10T00%3A00%3A00Z`),
     }
 };
 

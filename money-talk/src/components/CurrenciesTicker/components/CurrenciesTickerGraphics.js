@@ -1,5 +1,11 @@
 import React, { PureComponent } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import axios from "axios";
+import {apiUrls} from "../../../config/apiUrls";
+import {useLocal} from "../../../utils/useLocal";
+import {CurrenciesTickerStore} from "../../../store/CurennciesTickerStore/CurrenciesTickerStore";
+import {useAsync} from "../../../utils/useAsync";
+import {CurrenciesTickerGraphicsStore} from "../../../store/CurrenciesTickerGraphicsStore/CurrenciesTickerGraphicsStore";
 
 const data = [
     {
@@ -47,9 +53,12 @@ const data = [
 ];
 
 const Example = () => {
-    const jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
+    const store = useLocal(() => new CurrenciesTickerGraphicsStore())
 
-        return (
+    useAsync(store.fetch, []);
+    console.log(store.repos.map(data => data.prices))
+
+    return (
             <LineChart
                 width={500}
                 height={300}

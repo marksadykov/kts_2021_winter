@@ -2,12 +2,12 @@ import React, {useState} from "react";
 import {
     Avatar,
     Footer,
-    Group,
+    Group, List, Panel,
     PanelHeader, PanelHeaderBack,
     PanelHeaderButton,
     Search,
     SimpleCell,
-    SizeType,
+    SizeType, View,
     VKCOM
 } from "@vkontakte/vkui";
 import {Icon24Filter, Icon28AddOutline} from "@vkontakte/icons";
@@ -19,8 +19,9 @@ import CurrenciesMathFloor from "../../../utils/utils";
 import {Meta} from "../../../utils/Meta";
 import Loading from "./Loading";
 import Example from "./CurrenciesTickerGraphics";
+import CurrenciesTicker from "../CurrenciesTicker";
 
-const CurrenciesTickerSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined; sizeX: SizeType; filterSlide?: any; platform?: any; goSearch?: any; onFiltersClick?: any; setActiveView:any}) => {
+const CurrenciesTickerSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined; sizeX: SizeType; filterSlide?: any; platform?: any; goSearch?: any; onFiltersClick?: any; setActiveView:any; setTicker: any}) => {
     const [search, setSearch] = useState('')
     const onChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setSearch(e.target.value);
@@ -45,10 +46,13 @@ const CurrenciesTickerSearch = (props: { goHeaderSearch: ((event: React.MouseEve
             />
             <Group>
                 {store.repos.filter(({name, price}) => name.toLowerCase().indexOf(search.toLowerCase()) > -1 && price > props.filterSlide).map(data =>
-                    <SimpleCell key={data.id} before={<Avatar size={40} src={data.logoUrl}/>}>
+                    <List key={data.id} onClick={() => props.setTicker(data.id)}>
+                    <SimpleCell before={<Avatar size={40} src={data.logoUrl}/>} onClick={ () => props.setActiveView('info')}>
                         {data.name} {CurrenciesMathFloor(data.price)}
-                        <Example/>
-                    </SimpleCell>)
+                        {/*<Example/>*/}
+
+                    </SimpleCell>
+                    </List>)
                 }
                 {store.repos.length === 0 && <Footer>Ничего не найдено</Footer>}
             </Group>

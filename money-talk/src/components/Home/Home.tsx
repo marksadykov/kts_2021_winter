@@ -1,7 +1,9 @@
 import * as React from 'react';
-import {Card, CardScroll, CellButton, Group, Panel, PanelHeader, Root, View} from "@vkontakte/vkui";
+import {Card, CardScroll, CellButton, Group, Panel, PanelHeader, platform, Root, View} from "@vkontakte/vkui";
 import {useState} from "react";
 import CurrenciesTicker from "../CurrenciesTicker/CurrenciesTicker";
+import Example from "../CurrenciesTicker/components/CurrenciesTickerGraphics";
+import CurrenciesTickerGraphics from "../CurrenciesTicker/components/CurrenciesTickerGraphics";
 
 
 
@@ -9,6 +11,7 @@ import CurrenciesTicker from "../CurrenciesTicker/CurrenciesTicker";
 const Home = () => {
 
     const [activeView, setActiveView] = useState('home');
+    const [ticker, setTicker] = useState('')
 
     return (
             <Root activeView={activeView}>
@@ -74,12 +77,17 @@ const Home = () => {
                 </View>
                 <View activePanel="card" id="currenciesTicker">
                     <Panel id="card">
-                        <CurrenciesTicker setActiveView={setActiveView}/>
+                        <CurrenciesTicker setActiveView={setActiveView} setTicker={setTicker}/>
                     </Panel>
                 </View>
                 <View activePanel="card" id="lol">
                     <Panel id="card">
                         <PanelHeader>lol</PanelHeader>
+                    </Panel>
+                </View>
+                <View activePanel="info" id="info">
+                    <Panel id="info">
+                        <CurrenciesTickerGraphics setActiveView={setActiveView} ticker={ticker}/>
                     </Panel>
                 </View>
             </Root>);

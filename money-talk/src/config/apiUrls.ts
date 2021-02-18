@@ -1,5 +1,5 @@
 const apiCurrenciesTicker = (endpoint: string): string =>
-    `https://api.nomics.com/v1/${endpoint}`;
+    `https://cors-anywhere.herokuapp.com/https://api.nomics.com/v1/${endpoint}`;
 
 const apiKey = '2c3232c58c3be78c9ae8c6e265a51a41';
 

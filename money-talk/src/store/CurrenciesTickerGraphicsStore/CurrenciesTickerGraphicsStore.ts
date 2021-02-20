@@ -12,8 +12,10 @@ export class CurrenciesTickerGraphicsStore {
         entities: []
     }
     meta: Meta = Meta.initial
+    private ticker: any;
 
-    constructor() {
+    constructor(ticker: any) {
+        this.ticker = ticker
         makeObservable(this, {
             _repos: observable,
             meta: observable,
@@ -33,7 +35,7 @@ export class CurrenciesTickerGraphicsStore {
             entities: {}
         };
 
-        const { isError, data } = await requestCurrenciesTickerGraphics('currencies/sparkline')
+        const { isError, data } = await requestCurrenciesTickerGraphics('currencies/sparkline', this.ticker)
         if (isError) {
             this.meta = Meta.error
             return ;

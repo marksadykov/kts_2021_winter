@@ -7,7 +7,7 @@ import {
     withAdaptivity,
     withPlatform,
     Panel,
-    FormItem, Slider, Textarea, View
+    FormItem, Slider, Textarea, View, Button
 } from "@vkontakte/vkui";
 import {useLocal} from "../../../utils/useLocal";
 import {CurrenciesTickerGraphicsStore} from "../../../store/CurrenciesTickerGraphicsStore/CurrenciesTickerGraphicsStore";
@@ -16,9 +16,11 @@ import CurrenciesTickerSearch from "./CurrenciesTickerSearch";
 import Test from "./test";
 import {Meta} from "../../../utils/Meta";
 import Loading from "./Loading";
+import GraphicsCurrencies from "./test";
 
 const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any; setActiveView: any; ticker: any}) => {
-    const store = useLocal(() => new CurrenciesTickerGraphicsStore())
+    const store = useLocal(() => new CurrenciesTickerGraphicsStore(props.ticker))
+    const [value, setValue] = React.useState(false)
     const [timeToRender, setTimeToRender] = React.useState(0);
     useAsync(store.fetch, []);
 
@@ -29,21 +31,19 @@ const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any;
         },
     ];
 
-
-    React.useEffect(() => {
-    store.repos.forEach((value) => {
-    console.log('ssssss', value.prices, value.timestamps)
-        for (let i = 0; i < 30; i+=5) {
-            const current = {
-                date: String(value.timestamps[i]),
-                Доллары: Number(Math.floor(Number(value.prices[i]))),
-            };
-            clearData.push(current);
-        }});
-        console.log(clearData)
-        clearData.length > 1 && clearData.shift();
-        setTimeToRender(timeToRender => timeToRender + 1);
-        }, [store]);
+    const graphicsTest = () => {
+        store.repos.forEach((value) => {
+//console.log('ssssss', value.prices, value.timestamps)
+            for (let i = 0; i < 35; i+=5) {
+                const current = {
+                    date: String(value.timestamps[i]),
+                    Доллары: Number(Math.floor(Number(value.prices[i]))),
+                };
+                console.log(current)
+                clearData.push(current);
+            }});
+        return clearData;
+    }
 
 
     return (
@@ -51,12 +51,13 @@ const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any;
             <Panel id="info">
                 <PanelHeader
                     left={props.platform !== VKCOM &&
-                    <PanelHeaderBack onClick={() => props.setActiveView('home')}  />}
+                    <PanelHeaderBack onClick={() => props.setActiveView('home')} />}
                     separator={props.sizeX === SizeType.REGULAR}
                 >
                     {props.ticker}
                 </PanelHeader>
-                <Test clearData={clearData}/>
+                <Button onClick={ () => setValue(true)}>Показать график</Button>
+                <GraphicsCurrencies clearData={graphicsTest()}/>
             </Panel>
         </View>
 

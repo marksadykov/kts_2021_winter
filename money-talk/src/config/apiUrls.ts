@@ -9,8 +9,8 @@ export const apiUrls = {
             apiCurrenciesTicker(`${name}?key=${apiKey}&interval=1d,30d&convert=EUR&per-page=100&page=1`),
     },
     graphics: {
-        nameResponse: (name: string): string =>
-            apiCurrenciesTicker(`${name}?key=${apiKey}&ids=BTC,ETH,XRP&start=2021-01-10T00%3A00%3A00Z`),
+        nameResponse: (name: string, ticker: any): string =>
+            apiCurrenciesTicker(`${name}?key=${apiKey}&ids=${ticker}&start=2021-01-10T00%3A00%3A00Z`),
     }
 };
 

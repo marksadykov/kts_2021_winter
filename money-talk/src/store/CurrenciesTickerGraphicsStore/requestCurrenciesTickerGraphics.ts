@@ -8,10 +8,10 @@ import {log} from "../../utils/log";
 
 export const requestCurrenciesTickerGraphics = async (
     organization: string
-): Promise<ApiResp<CollectionT<number, GetCurrenciesTickerGraphicsModel>>> => {
+    , ticker: any): Promise<ApiResp<CollectionT<number, GetCurrenciesTickerGraphicsModel>>> => {
     try {
         const response = await axios(
-            apiUrls.graphics.nameResponse(organization)
+            apiUrls.graphics.nameResponse(organization, ticker)
         );
         return {
             isError: false,

@@ -17,8 +17,6 @@ import iconExchange from './icons/exchange.svg'
 import Change from "../Change";
 import Chart from "../Chart";
 
-import useData from "../../store/useData";
-
 const Home = () => {
 
     const [activeView, setActiveView] = React.useState('home');
@@ -102,7 +100,6 @@ const Home = () => {
                     </Panel>
                 </View>
             </Root>);
-
 };
 
 export default Home;

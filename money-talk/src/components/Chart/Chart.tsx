@@ -25,11 +25,14 @@ const MainChart = () => {
 
     const screenWidth = useWindowSize();
 
-    const [start, end] = makeInterval();
+    // const [start, end] = makeInterval();
 
     const data = useData('volume/history',
-        start,
-        end);
+        // start,
+        // end
+        '2021-02-14T00%3A00%3A00Z',
+        '2021-02-15T00%3A00%3A00Z'
+    );
 
     React.useEffect(() => {
         data.forEach((item: {timestamp: string, volume: string}) => {
@@ -39,6 +42,7 @@ const MainChart = () => {
             };
             clearData.push(current);
         });
+        console.log(data);
         clearData.length > 1 && clearData.shift();
         setTimeToRender(timeToRender => timeToRender + 1);
     }, [data]);

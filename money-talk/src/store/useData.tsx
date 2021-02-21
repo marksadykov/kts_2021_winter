@@ -1,7 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
 
-import config from '../config/constants';
+import config from '../config/apiUrls';
 
 const useData = (option: string = '', start: string = '', end: string = '') => {
 
@@ -27,6 +27,7 @@ const useData = (option: string = '', start: string = '', end: string = '') => {
             //     console.log(data);
             // });
 
+            console.log(`${config.baseUrl}${option}?key=${config.apiKey}&start=${start}&end=${end}`);
             fetch(`${config.baseUrl}${option}?key=${config.apiKey}&start=${start}&end=${end}`)
                 .then(response => response.json())
                 .then(response => {

@@ -1,5 +1,5 @@
 const apiCurrenciesTicker = (endpoint: string): string =>
-    `https://cors-anywhere.herokuapp.com/https://api.nomics.com/v1/${endpoint}`;
+    `https://api.nomics.com/v1/${endpoint}`;
 
 const apiKey = '2c3232c58c3be78c9ae8c6e265a51a41';
 
@@ -11,6 +11,10 @@ export const apiUrls = {
     graphics: {
         nameResponse: (name: string, ticker: any): string =>
             apiCurrenciesTicker(`${name}?key=${apiKey}&ids=${ticker}&start=2021-01-10T00%3A00%3A00Z`),
+    },
+    info: {
+        nameResponse: (name: string, ticker: string): string =>
+            apiCurrenciesTicker(`${name}?key=${apiKey}&ids=${ticker}&attributes=id,website_url,logo_url,facebook_url,twitter_url`)
     }
 };
 

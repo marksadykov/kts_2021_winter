@@ -25,9 +25,6 @@ const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActi
 
     const { platform } = props;
 
-    console.log(platform)
-    console.log(activeModal)
-    console.log(filterSlider)
     return (
         <View activePanel={activePanel}>
             <Panel id="search">
@@ -38,7 +35,7 @@ const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActi
                 >
                     Currencies Ticker
                 </PanelHeader>
-                    <FormItem top="Simple 0, 10000">
+                    <FormItem top="Filter 0 - 10000 $">
                         <Slider
                             min={0}
                             max={10000}

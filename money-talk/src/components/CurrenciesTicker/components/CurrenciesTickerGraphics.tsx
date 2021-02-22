@@ -12,16 +12,13 @@ import {
 import {useLocal} from "../../../utils/useLocal";
 import {CurrenciesTickerGraphicsStore} from "../../../store/CurrenciesTickerGraphicsStore/CurrenciesTickerGraphicsStore";
 import {useAsync} from "../../../utils/useAsync";
-import CurrenciesTickerSearch from "./CurrenciesTickerSearch";
-import Test from "./test";
-import {Meta} from "../../../utils/Meta";
-import Loading from "./Loading";
-import GraphicsCurrencies from "./test";
+import Graphics from "./Graphics";
+import InfoCurrenciesTicker from "./InfoCurrenciesTicker";
+import PercentageInformationCurrencies from "./PercentageInformationCurrencies";
 
 const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any; setActiveView: any; ticker: any}) => {
     const store = useLocal(() => new CurrenciesTickerGraphicsStore(props.ticker))
-    const [value, setValue] = React.useState(false)
-    const [timeToRender, setTimeToRender] = React.useState(0);
+    const [show, setShow] = React.useState(false)
     useAsync(store.fetch, []);
 
     const clearData: {date: string, Доллары: number}[] = [
@@ -31,10 +28,9 @@ const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any;
         },
     ];
 
-    const graphicsTest = () => {
+    const graphicsData = () => {
         store.repos.forEach((value) => {
-//console.log('ssssss', value.prices, value.timestamps)
-            for (let i = 0; i < 35; i+=5) {
+            for (let i = 0; i < 43; i+=3) {
                 const current = {
                     date: String(value.timestamps[i]),
                     Доллары: Number(Math.floor(Number(value.prices[i]))),
@@ -56,8 +52,10 @@ const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any;
                 >
                     {props.ticker}
                 </PanelHeader>
-                <Button onClick={ () => setValue(true)}>Показать график</Button>
-                <GraphicsCurrencies clearData={graphicsTest()}/>
+                <Button stretched mode="secondary" size="m" onClick={ () => setShow(!show)}>Показать график</Button>
+                <PercentageInformationCurrencies ticker={props.ticker}/>
+                <Graphics clearData={graphicsData()}/>
+                <InfoCurrenciesTicker ticker={props.ticker}/>
             </Panel>
         </View>
 

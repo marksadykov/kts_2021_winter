@@ -2,9 +2,13 @@ import * as React from 'react';
 
 const calculateValue = (firstValue: number, firstCountry: { country?: string; value: any; }, secondCountry: { country?: string; value: any; }) => {
 
-    const secondValue = String(firstValue * ( firstCountry.value / secondCountry.value));
+    const secondValue = firstValue * ( firstCountry.value / secondCountry.value);
 
-    return (secondValue === 'NaN' ? '' : secondValue);
+    if (isNaN(secondValue) || !isFinite(secondValue)) {
+        return ' ';
+    }
+    
+    return String(secondValue);
 }
 
 export default calculateValue;

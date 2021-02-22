@@ -1,5 +1,3 @@
-import {number, string} from "prop-types";
-
 export type currencyModel = {
     symbol: string,
     name: string,

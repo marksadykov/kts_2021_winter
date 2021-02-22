@@ -1,18 +1,16 @@
 import * as React from 'react';
 
-const changeHours = (currentDate: Date, hours: number) => {
+const interval: number = 6;
+
+const changeHours = (currentDate: Date, days: number) => {
     const date = new Date(currentDate.valueOf());
-    date.setDate(date.getDate() - hours);
+    date.setDate(date.getDate() - days);
     return date;
 }
 
 const makeInterval = () => {
     const end = new Date();
-
-    const start = changeHours(end, 4);
-
-    // console.log(start, end);
-    // console.log(start.toISOString(), end.toISOString());
+    const start = changeHours(end, interval);
     return [start.toISOString(), end.toISOString()];
 }
 

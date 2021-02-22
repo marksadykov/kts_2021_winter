@@ -2,8 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 
 const config = {
-    // apiKey: '2c3232c58c3be78c9ae8c6e265a51a41',
-    apiKey: 'demo-6410726746980cead2a17c9db9ef29af',
+    apiKey: '2c3232c58c3be78c9ae8c6e265a51a41',
     baseUrl: 'https://api.nomics.com/v1/',
 };
 
@@ -31,7 +30,6 @@ const useData = (option: string = '', start: string = '', end: string = '') => {
             //     console.log(data);
             // });
 
-            console.log(`${config.baseUrl}${option}?key=${config.apiKey}&start=${start}&end=${end}`);
             fetch(`${config.baseUrl}${option}?key=${config.apiKey}&start=${start}&end=${end}`)
                 .then(response => response.json())
                 .then(response => {

@@ -22,27 +22,30 @@ const clearData: {date: string, Доллары: number}[] = [
 const MainChart = () => {
 
     const [timeToRender, setTimeToRender] = React.useState(0);
-
     const screenWidth = useWindowSize();
-
-    // const [start, end] = makeInterval();
-
+    const [start, end] = makeInterval();
     const data = useData('volume/history',
-        // start,
-        // end
-        '2021-02-14T00%3A00%3A00Z',
-        '2021-02-20T00%3A00%3A00Z'
+        start,
+        end
     );
 
     React.useEffect(() => {
         data.forEach((item: {timestamp: string, volume: string}) => {
+            const currentDate = new Date(item.timestamp);
+            const currentDateProp = {
+                year: currentDate.getFullYear(),
+                month: currentDate.getMonth(),
+                day: currentDate.getDate()
+            };
+            const date = `${currentDateProp.day}.`+
+                `${currentDateProp.month}.`+
+                `${currentDateProp.year}`;
             const current = {
-                date: String((item.timestamp) ? item.timestamp : 'n'),
+                date: (date) ? date : 'n',
                 Доллары: Number((item.volume) ? item.volume : 0),
             };
             clearData.push(current);
         });
-        console.log(data);
         clearData.length > 1 && clearData.shift();
         setTimeToRender(timeToRender => timeToRender + 1);
     }, [data]);
@@ -62,7 +65,7 @@ const MainChart = () => {
             </Title>
             <LineChart
                 width={screenWidth.width-40}
-                height={200}
+                height={150}
                 data={clearData}
             >
                 <XAxis dataKey="date" tick={{ fill: '#818c99', fontSize: 13 }}/>

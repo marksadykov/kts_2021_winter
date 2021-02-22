@@ -13,9 +13,17 @@ const currencyApi = (idFirst: string, idSecond: string): string =>
 const exchangeApi = `${config.baseUrl}/exchange-rates?`+
                     `key=${config.apiKey}`;
 
+const worldApi = (start: string, end: string):string =>
+    `${config.baseUrl}volume/history`+
+    `?key=${config.apiKey}&`+
+    `start=${start}`+
+    `&end=${end}`
+
 export const apiUrls = {
     currency: (idFirst: string, idSecond: string): string =>
         currencyApi(idFirst, idSecond),
 
-    exchange: (): string => exchangeApi
+    exchange: (): string => exchangeApi,
+
+    world: (start: string, end: string): string => worldApi(start, end),
 };

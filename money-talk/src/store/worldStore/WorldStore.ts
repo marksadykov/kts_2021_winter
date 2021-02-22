@@ -1,23 +1,19 @@
 import {observable, action, computed, makeObservable, runInAction, IReactionDisposer, reaction} from 'mobx';
-import { currencyModel, exchangeModel } from '../models';
+import { worldModel } from '../models';
 import { Meta } from '../../utils/meta';
-import {requestCurrencyStore} from "./requestCurrencyStore";
+import { requestWorldStore } from "./requestWorldStore";
 import { ILocalStore } from '../../utils/useLocal';
 
-export default class CurrencyStore implements ILocalStore {
-    // _currency: currencyModel[] = [];
-    _exchange: exchangeModel[] = [];
+export default class WorldStore implements ILocalStore {
+    _world: worldModel[] = [];
 
     meta: Meta = Meta.initial;
 
     constructor() {
         makeObservable(this, {
-            // _currency: observable,
+            _world: observable,
             fetch: action,
-            // currency: computed,
-
-            _exchange: observable,
-            exchange: computed,
+            world: computed,
         });
     }
 
@@ -27,10 +23,9 @@ export default class CurrencyStore implements ILocalStore {
         }
 
         this.meta = Meta.loading;
-        this._exchange = [];
+        this._world = [];
 
-        // const { isError, data } = await requestCurrencyStore('BTC', 'ETH');
-        const { isError, data } = await requestCurrencyStore();
+        const { isError, data } = await requestWorldStore();
         if (isError) {
             this.meta = Meta.error;
             return;
@@ -38,17 +33,12 @@ export default class CurrencyStore implements ILocalStore {
 
         runInAction(() => {
             this.meta = Meta.success;
-            // this._currency = data;
-            this._exchange = data.slice();
+            this._world = data.slice();
         });
     }
 
-    // get currency():currencyModel[] {
-    //     return this._currency;
-    // }
-
-    get exchange():exchangeModel[] {
-        return this._exchange;
+    get world():worldModel[] {
+        return this._world;
     }
 
     destroy(): void {

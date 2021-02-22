@@ -31,7 +31,7 @@ const MainChart = () => {
         // start,
         // end
         '2021-02-14T00%3A00%3A00Z',
-        '2021-02-15T00%3A00%3A00Z'
+        '2021-02-20T00%3A00%3A00Z'
     );
 
     React.useEffect(() => {

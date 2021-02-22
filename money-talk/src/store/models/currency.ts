@@ -13,10 +13,20 @@ export type currencyApiModel = {
 };
 
 export const normalizeCurrencyModel = (
-    raw: currencyApiModel
-): currencyModel => ({
-    symbol: raw.symbol,
-    name: raw.name,
-    logoUrl: raw.logo_url,
-    value: raw.value
-});
+    raw: currencyApiModel[]
+): (currencyModel)[] => (
+    [
+        {
+        symbol: raw[0].symbol,
+        name: raw[0].name,
+        logoUrl: raw[0].logo_url,
+        value: raw[0].value
+    },
+    {
+        symbol: raw[1].symbol,
+        name: raw[1].name,
+        logoUrl: raw[1].logo_url,
+        value: raw[1].value
+    }
+    ]
+);

@@ -1,7 +1,11 @@
 import * as React from 'react';
 import axios from 'axios';
 
-import config from '../config/apiUrls';
+const config = {
+    // apiKey: '2c3232c58c3be78c9ae8c6e265a51a41',
+    apiKey: 'demo-6410726746980cead2a17c9db9ef29af',
+    baseUrl: 'https://api.nomics.com/v1/',
+};
 
 const useData = (option: string = '', start: string = '', end: string = '') => {
 

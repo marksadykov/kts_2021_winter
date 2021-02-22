@@ -17,7 +17,7 @@ export const requestCurrencyStore = async (
     } catch (e) {
         return {
             isError: true,
-            data: null,
+            data: [],
         };
     }
 };

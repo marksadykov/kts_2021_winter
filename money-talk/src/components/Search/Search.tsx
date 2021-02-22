@@ -13,7 +13,7 @@ const money = [
     {id: 3, name: "Евро", value: 0.75},
 ];
 
-const getMoney = (search: string) => {
+const getMoney = (search: string, money: {id: number, name: string, value:number}[]) => {
     const searchValue = search.toLowerCase();
     return money.filter(({name}) => name.toLowerCase().indexOf(searchValue) > -1);
 }
@@ -36,7 +36,7 @@ const SimpleSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLEle
                 <Search value={search} onChange={(e: any) => {setSearch(e.target.value)}
                 }
                 after={null}/>
-                {getMoney(search).length > 0 && getMoney(search).map((item: any) =>
+                {getMoney(search, props.listCurrency).length > 0 && getMoney(search, props.listCurrency).map((item: any) =>
                     <Cell onClick={ () => {
                             props.currentCountry({
                                 country:item.name,
@@ -50,7 +50,7 @@ const SimpleSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLEle
                     }
                     key={item.id}>{item.name}</Cell>
                 )}
-                {getMoney(search).length === 0 && <Footer>Ничего не найдено</Footer>}
+                {getMoney(search, props.listCurrency).length === 0 && <Footer>Ничего не найдено</Footer>}
             </Group>
         </>
     );

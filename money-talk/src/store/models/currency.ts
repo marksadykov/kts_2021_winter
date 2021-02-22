@@ -1,15 +1,17 @@
+import {number, string} from "prop-types";
+
 export type currencyModel = {
     symbol: string,
     name: string,
     logoUrl: string,
-    value: number
+    price: number
 };
 
 export type currencyApiModel = {
     symbol: string,
     name: string,
     logo_url: string,
-    value: number
+    price: string
 };
 
 export const normalizeCurrencyModel = (
@@ -20,13 +22,35 @@ export const normalizeCurrencyModel = (
         symbol: raw[0].symbol,
         name: raw[0].name,
         logoUrl: raw[0].logo_url,
-        value: raw[0].value
+            price: +raw[0].price
     },
     {
         symbol: raw[1].symbol,
         name: raw[1].name,
         logoUrl: raw[1].logo_url,
-        value: raw[1].value
+        price: +raw[1].price
     }
     ]
 );
+
+export type exchangeApiModel = {
+    currency: string,
+    rate: string,
+}
+
+export type exchangeModel = {
+    id: number,
+    name: string,
+    volume: number,
+}
+
+export const normalizeExchangeModel = (raw: exchangeApiModel[]): (exchangeModel)[] => {
+
+    return raw.map((item, index) =>{
+        return {
+            id: index,
+            name: item.currency,
+            volume: +item.rate
+        };
+    });
+}

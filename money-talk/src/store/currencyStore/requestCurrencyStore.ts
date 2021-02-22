@@ -1,18 +1,21 @@
 import axios from 'axios';
 
 import { apiUrls } from '../../config/apiUrls';
-import  { normalizeCurrencyModel } from '../models';
+import {normalizeCurrencyModel, normalizeExchangeModel} from '../models';
 
 export const requestCurrencyStore = async (
-    id: string
+    // idFirst: string,
+    // idSecond: string,
 ) => {
     try {
         const response = await axios(
-            apiUrls.currency(id)
+            // apiUrls.currency(idFirst, idSecond)
+            apiUrls.exchange()
         );
         return {
             isError: false,
-            data: normalizeCurrencyModel(response.data),
+            // data: normalizeCurrencyModel(response.data),
+            data: normalizeExchangeModel(response.data)
         };
     } catch (e) {
         return {

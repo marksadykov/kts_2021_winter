@@ -18,9 +18,15 @@ const getMoney = (search: string) => {
     return money.filter(({name}) => name.toLowerCase().indexOf(searchValue) > -1);
 }
 
-const SimpleSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined; sizeX: SizeType; platform: any;
+const SimpleSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined;
+    sizeX: SizeType;
+    platform: any;
     currentCountry: any;
-    setActiveModal: any;}) =>  {
+    setActiveModal: any;
+    listCurrency: any;
+}) =>  {
+
+    console.log('listCurrency', props.listCurrency[0].name);
 
     const [search, setSearch] = React.useState('');
 
@@ -51,7 +57,13 @@ const SimpleSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLEle
 }
 
 
-const SearchExample = (props: { sizeX?: any; platform?: any; currentCountry: any; setActiveModal: any;}) => {
+const SearchExample = (props: {
+    sizeX?: any;
+    platform?: any;
+    currentCountry: any;
+    setActiveModal: any;
+    listCurrency: any,
+}) => {
 
     const [activePanel, setActivePanel] = React.useState('search');
 
@@ -63,7 +75,9 @@ const SearchExample = (props: { sizeX?: any; platform?: any; currentCountry: any
             <Panel id="search">
                 <SimpleSearch currentCountry={props.currentCountry}
                               setActiveModal={props.setActiveModal}
-                              sizeX={props.sizeX} goHeaderSearch={() => setActivePanel('header-search')} platform={platform} />
+                              sizeX={props.sizeX} goHeaderSearch={() => setActivePanel('header-search')}
+                              listCurrency={props.listCurrency}
+                              platform={platform} />
             </Panel>
         </View>
     );

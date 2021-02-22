@@ -3,14 +3,19 @@ const config = {
     baseUrl: 'https://api.nomics.com/v1/',
 };
 
-const currencyApi = (id: string): string =>
-    `${config.baseUrl}currencies/ticker?
-    key=${config.baseUrl}&
-    ids=${id}&
-    interval=1h&
-    convert=USD`;
+const currencyApi = (idFirst: string, idSecond: string): string =>
+    `${config.baseUrl}currencies/ticker?`+
+    `key=${config.apiKey}&`+
+    `ids=${idFirst},${idSecond}&`+
+    `interval=1h&`+
+    `convert=USD`;
+
+const exchangeApi = `${config.baseUrl}/exchange-rates?`+
+                    `key=${config.apiKey}`;
 
 export const apiUrls = {
-    currency: (id: string): string =>
-        currencyApi(id),
+    currency: (idFirst: string, idSecond: string): string =>
+        currencyApi(idFirst, idSecond),
+
+    exchange: (): string => exchangeApi
 };

@@ -1,1 +1,1 @@
-export { default } from './currencyStore';
+export { default } from './CurrencyStore';

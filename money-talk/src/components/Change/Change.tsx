@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {observer} from 'mobx-react-lite';
 import {
     FormItem,
     Group,
@@ -13,8 +14,18 @@ import {
 import Search from "../Search";
 import {Icon24Dismiss} from "@vkontakte/icons";
 import calculateValue from './utils/calculateValue';
+import CurrencyStore from '../../store/currencyStore';
+
+import { useAsync } from '../../utils/useAsync';
+import { useLocalStore } from '../../utils/useLocal';
 
 const Change = (props: {setActiveView: any}) => {
+
+    const store = useLocalStore(() => new CurrencyStore());
+
+    useAsync(() => store.fetch(), []);
+
+    console.log('store.exchange', store.exchange);
 
     const [activeModal, setActiveModal] = React.useState({
         homeValue: null,
@@ -88,6 +99,7 @@ const Change = (props: {setActiveView: any}) => {
                     <Search
                         currentCountry={setCurrentCountry}
                         setActiveModal={setActiveModal}
+                        listCurrency={store.exchange}
                     />
                 </Group>
             </ModalPage>
@@ -135,6 +147,7 @@ const Change = (props: {setActiveView: any}) => {
                     <Search
                         currentCountry={setCurrentCountry2}
                         setActiveModal={setActiveModal}
+                        listCurrency={store.exchange}
                     />
                 </Group>
             </ModalPage>
@@ -146,6 +159,11 @@ const Change = (props: {setActiveView: any}) => {
         <View activePanel="modals" modal={modal}>
             <Panel id="modals">
                 <Group header={<Header onClick={() => props.setActiveView('home')} mode="secondary">Назад</Header>}>
+
+                    <FormItem>
+                        <p>{store.exchange[0]?.name}</p>
+                    </FormItem>
+
                     <FormItem top="Выберите валюту 1">
                         <SelectMimicry
                             placeholder="Не выбрана"
@@ -178,4 +196,4 @@ const Change = (props: {setActiveView: any}) => {
     )
 }
 
-export default Change;
+export default observer(Change);

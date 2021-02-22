@@ -41,7 +41,7 @@ export type exchangeApiModel = {
 export type exchangeModel = {
     id: number,
     name: string,
-    volume: number,
+    value: number,
 }
 
 export const normalizeExchangeModel = (raw: exchangeApiModel[]): (exchangeModel)[] => {
@@ -50,7 +50,7 @@ export const normalizeExchangeModel = (raw: exchangeApiModel[]): (exchangeModel)
         return {
             id: index,
             name: item.currency,
-            volume: +item.rate
+            value: +item.rate
         };
     });
 }

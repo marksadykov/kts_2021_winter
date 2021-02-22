@@ -25,8 +25,6 @@ const Change = (props: {setActiveView: any}) => {
 
     useAsync(() => store.fetch(), []);
 
-    console.log('store.exchange', store.exchange);
-
     const [activeModal, setActiveModal] = React.useState({
         homeValue: null,
         currentValue: '',
@@ -34,12 +32,12 @@ const Change = (props: {setActiveView: any}) => {
 
     const [currentCountry, setCurrentCountry] = React.useState({
         country: '',
-        value: 0.0
+        value: 0
     });
 
     const [currentCountry2, setCurrentCountry2] = React.useState({
         country: '',
-        value: 0.0
+        value: 0
     });
 
     const [firstMoney, setFirstMoney] = React.useState(0);
@@ -159,11 +157,6 @@ const Change = (props: {setActiveView: any}) => {
         <View activePanel="modals" modal={modal}>
             <Panel id="modals">
                 <Group header={<Header onClick={() => props.setActiveView('home')} mode="secondary">Назад</Header>}>
-
-                    <FormItem>
-                        <p>{store.exchange[0]?.name}</p>
-                    </FormItem>
-
                     <FormItem top="Выберите валюту 1">
                         <SelectMimicry
                             placeholder="Не выбрана"

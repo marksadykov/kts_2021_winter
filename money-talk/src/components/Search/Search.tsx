@@ -12,7 +12,7 @@ const getMoney = (search: string, money: {id: number, name: string, value:number
     return money.filter(({name}) => name.toLowerCase().indexOf(searchValue) > -1);
 }
 
-const SimpleSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined;
+const ChoseSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined;
     sizeX: SizeType;
     platform: any;
     currentCountry: any;
@@ -49,7 +49,7 @@ const SimpleSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLEle
 }
 
 
-const SearchExample = (props: {
+const SearchGroup = (props: {
     sizeX?: any;
     platform?: any;
     currentCountry: any;
@@ -65,7 +65,7 @@ const SearchExample = (props: {
             activePanel={activePanel}
         >
             <Panel id="search">
-                <SimpleSearch currentCountry={props.currentCountry}
+                <ChoseSearch currentCountry={props.currentCountry}
                               setActiveModal={props.setActiveModal}
                               sizeX={props.sizeX} goHeaderSearch={() => setActivePanel('header-search')}
                               listCurrency={props.listCurrency}
@@ -75,4 +75,4 @@ const SearchExample = (props: {
     );
 }
 
-export default SearchExample;
+export default SearchGroup;

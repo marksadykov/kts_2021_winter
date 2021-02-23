@@ -47,6 +47,7 @@ const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActi
                         <Textarea
                             value={String(Math.floor(filterSlider))}
                             onChange={e => setFilterSlider(e.target.value)}
+                            style={{ height:'45px'}}
                         />
                     </FormItem>
 

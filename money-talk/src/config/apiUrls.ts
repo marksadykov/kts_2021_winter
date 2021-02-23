@@ -4,7 +4,7 @@ const apiCurrenciesTicker = (endpoint: string): string =>
 const apiKey = '2c3232c58c3be78c9ae8c6e265a51a41';
 
 export const apiUrls = {
-    currency: {
+    currencyTicker: {
         nameResponse: (name: string): string =>
             apiCurrenciesTicker(`${name}?key=${apiKey}&interval=1d,30d&convert=EUR&per-page=100&page=1`),
     },
@@ -14,7 +14,8 @@ export const apiUrls = {
     },
     info: {
         nameResponse: (name: string, ticker: string): string =>
-            apiCurrenciesTicker(`${name}?key=${apiKey}&ids=${ticker}&attributes=id,website_url,logo_url,facebook_url,twitter_url`)
+            apiCurrenciesTicker(`${name}?key=${apiKey}&ids=${ticker}&attributes=
+            id,website_url,logo_url,facebook_url,twitter_url,github_url,telegram_url,youtube_url,discord_url`)
     }
 };
 

@@ -30,7 +30,7 @@ const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any;
 
     const graphicsData = () => {
         store.repos.forEach((value) => {
-            for (let i = 0; i < 43; i+=3) {
+            for (let i = 0; i < value.prices.length; i+=1) {
                 const current = {
                     date: String(value.timestamps[i]),
                     Доллары: Number(Math.floor(Number(value.prices[i]))),

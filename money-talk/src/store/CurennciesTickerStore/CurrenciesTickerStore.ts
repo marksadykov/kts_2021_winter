@@ -1,4 +1,4 @@
-import {GetCurrenciesTickerModel} from "../models/currency";
+import {GetCurrenciesTickerModel} from "../models/currencyTicker";
 import {Meta} from "../../utils/Meta";
 import {action, computed, makeObservable, observable, runInAction,} from 'mobx';
 import {requestCurrenciesTicker} from "./requestCurrenciesTicker";

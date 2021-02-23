@@ -6,7 +6,11 @@ export type GetCurrenciesTickerInfoApiModel = {
     website_url: string,
     logo_url: string,
     facebook_url: string,
-    twitter_url: string
+    twitter_url: string,
+    github_url: string,
+    telegram_url: string,
+    youtube_url: string,
+    discord_url: string
 }
 
 export const normalizeCurrenciesTickerInfoModel = (raw: GetCurrenciesTickerInfoApiModel): GetCurrenciesTickerInfoModel => ({
@@ -14,7 +18,11 @@ export const normalizeCurrenciesTickerInfoModel = (raw: GetCurrenciesTickerInfoA
     websiteUrl: raw.website_url,
     logoUrl: raw.logo_url,
     facebookUrl: raw.facebook_url,
-    twitterUrl: raw.twitter_url
+    twitterUrl: raw.twitter_url,
+    githubUrl: raw.github_url,
+    telegramUrl: raw.telegram_url,
+    youtubeUrl: raw.youtube_url,
+    discordUrl: raw.discord_url
 })
 
 export const normalizeCurrenciesTickerInfoToCollection = (

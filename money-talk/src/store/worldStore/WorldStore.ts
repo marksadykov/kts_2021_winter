@@ -33,7 +33,6 @@ export default class WorldStore implements ILocalStore {
         this._world = [];
 
         const { isError, data } = await requestWorldStore(this._startTime, this._endTime);
-        console.log('data', data);
         if (isError) {
             this.meta = Meta.error;
             return;
@@ -42,7 +41,6 @@ export default class WorldStore implements ILocalStore {
         runInAction(() => {
             this.meta = Meta.success;
             this._world = data.slice();
-            console.log('this._world', this._world);
         });
     }
 

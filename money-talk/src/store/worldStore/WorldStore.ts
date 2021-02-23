@@ -17,7 +17,7 @@ export default class WorldStore implements ILocalStore {
             _world: observable,
             _startTime: observable,
             _endTime: observable,
-            fetch: action,
+            fetch: action.bound,
             world: computed,
         });
         this._startTime = start;
@@ -33,6 +33,7 @@ export default class WorldStore implements ILocalStore {
         this._world = [];
 
         const { isError, data } = await requestWorldStore(this._startTime, this._endTime);
+        console.log('data', data);
         if (isError) {
             this.meta = Meta.error;
             return;
@@ -41,6 +42,7 @@ export default class WorldStore implements ILocalStore {
         runInAction(() => {
             this.meta = Meta.success;
             this._world = data.slice();
+            console.log('this._world', this._world);
         });
     }
 

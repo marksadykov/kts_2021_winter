@@ -16,11 +16,18 @@ import {ReactSVG} from "react-svg";
 import iconExchange from './icons/exchange.svg'
 import Change from "../Change";
 import Chart from "../Chart";
-import Bitcoin from "../Bitcoin";
+import SingleCurrency from "../SingleCurrency";
+import {useLocalStore} from "../../utils/useLocal";
+import {useAsync} from "../../utils/useAsync";
+import singleCurrencyStore from "../../store/singleCurrencyStore";
 
 const Home = () => {
 
     const [activeView, setActiveView] = React.useState('home');
+
+    const store = useLocalStore(() => new singleCurrencyStore(['BTC','ETH', 'LTC', 'XMR']));
+
+    useAsync(store.fetch, []);
 
     return (
             <Root activeView={activeView}>
@@ -41,43 +48,33 @@ const Home = () => {
 
                                 </Card>
                                 <Card>
-                                    <div style={{ paddingBottom: '66%' }}>
-                                    </div>
                                 </Card>
                                 <Card>
-                                    <div style={{ paddingBottom: '66%' }} />
                                 </Card>
                                 <Card>
-                                    <div style={{ paddingBottom: '66%' }} />
                                 </Card>
                                 <Card>
-                                    <div style={{ paddingBottom: '66%' }} />
                                 </Card>
                             </CardScroll>
                         </Group>
-                        <CardScroll size="m">
+                        <CardScroll size="s">
                             <Card>
-                                <Bitcoin />
+                                <SingleCurrency />
                             </Card>
                             <Card>
-                                <div style={{ paddingBottom: '42%' }} />
                             </Card>
                             <Card>
-                                <div style={{ paddingBottom: '42%' }} />
                             </Card>
                             <Card>
-                                <div style={{ paddingBottom: '42%' }} />
                             </Card>
                         </CardScroll>
                         <CardScroll size="l">
                             <Card>
-                                <div style={{ paddingBottom: '29%' }} />
+                                <div>l</div>
                             </Card>
                             <Card>
-                                <div style={{ paddingBottom: '29%' }} />
                             </Card>
                             <Card>
-                                <div style={{ paddingBottom: '29%' }} />
                             </Card>
                         </CardScroll>
                         <Group description="в Долларах">
@@ -93,11 +90,6 @@ const Home = () => {
                     <Panel id="card">
                         <PanelHeader>Конвертер</PanelHeader>
                         <Change setActiveView={setActiveView} />
-                    </Panel>
-                </View>
-                <View activePanel="card" id="graphic">
-                    <Panel id="card">
-                        <PanelHeader>lol</PanelHeader>
                     </Panel>
                 </View>
             </Root>);

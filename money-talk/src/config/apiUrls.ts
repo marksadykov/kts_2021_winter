@@ -3,10 +3,10 @@ const config = {
     baseUrl: 'https://api.nomics.com/v1/',
 };
 
-const currencyApi = (idFirst: string, idSecond: string): string =>
+const currencyApi = (symbols: string[]): string =>
     `${config.baseUrl}currencies/ticker?`+
     `key=${config.apiKey}&`+
-    `ids=${idFirst},${idSecond}&`+
+    `ids=${symbols.join()}&`+
     `interval=1h&`+
     `convert=USD`;
 
@@ -20,8 +20,8 @@ const worldApi = (start: string, end: string):string =>
     `&end=${end}`
 
 export const apiUrls = {
-    currency: (idFirst: string, idSecond: string): string =>
-        currencyApi(idFirst, idSecond),
+    currency: (symbols: string[]): string =>
+        currencyApi(symbols),
 
     exchange: (): string => exchangeApi,
 

@@ -16,6 +16,7 @@ import {ReactSVG} from "react-svg";
 import iconExchange from './icons/exchange.svg'
 import Change from "../Change";
 import Chart from "../Chart";
+import Bitcoin from "../Bitcoin";
 
 const Home = () => {
 
@@ -56,7 +57,7 @@ const Home = () => {
                         </Group>
                         <CardScroll size="m">
                             <Card>
-                                <div style={{ paddingBottom: '42%' }} />
+                                <Bitcoin />
                             </Card>
                             <Card>
                                 <div style={{ paddingBottom: '42%' }} />

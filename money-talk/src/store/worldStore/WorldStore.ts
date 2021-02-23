@@ -9,12 +9,19 @@ export default class WorldStore implements ILocalStore {
 
     meta: Meta = Meta.initial;
 
-    constructor() {
+    _startTime = '';
+    _endTime = '';
+
+    constructor(start: string, end: string) {
         makeObservable(this, {
             _world: observable,
+            _startTime: observable,
+            _endTime: observable,
             fetch: action,
             world: computed,
         });
+        this._startTime = start;
+        this._endTime = end;
     }
 
     async fetch(): Promise<void> {
@@ -25,7 +32,7 @@ export default class WorldStore implements ILocalStore {
         this.meta = Meta.loading;
         this._world = [];
 
-        const { isError, data } = await requestWorldStore();
+        const { isError, data } = await requestWorldStore(this._startTime, this._endTime);
         if (isError) {
             this.meta = Meta.error;
             return;

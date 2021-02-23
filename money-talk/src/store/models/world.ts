@@ -15,7 +15,7 @@ export const normalizeWorldModel = (raw: worldApiModel[]): (worldModel)[] => {
         const currentDate = new Date(item.timestamp);
         const currentDateProp = {
             year: currentDate.getFullYear(),
-            month: currentDate.getMonth(),
+            month: currentDate.getMonth() + 1,
             day: currentDate.getDate()
         };
         const date = `${currentDateProp.day}.`+

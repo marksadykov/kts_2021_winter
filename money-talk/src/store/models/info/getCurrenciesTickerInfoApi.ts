@@ -1,5 +1,5 @@
 import {GetCurrenciesTickerInfoModel} from "./getCurrenciesTickerInfo";
-import {CollectionT} from "../../../utils/collection";
+import {CollectionT} from "../../../utils";
 
 export type GetCurrenciesTickerInfoApiModel = {
     id: string,

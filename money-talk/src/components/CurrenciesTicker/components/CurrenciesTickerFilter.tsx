@@ -12,13 +12,13 @@ import {
 } from "@vkontakte/vkui";
 import {Icon24Filter} from "@vkontakte/icons";
 
-import ApiService from "../../../store/ApiService";
 import Loading from "./Loading";
-import CurrenciesMathFloor from "../../../utils/utils";
-import {useLocal} from "../../../utils/useLocal";
-import {CurrenciesTickerStore} from "../../../store/CurennciesTickerStore/CurrenciesTickerStore";
-import {useAsync} from "../../../utils/useAsync";
-import {Meta} from "../../../utils/Meta";
+import {useLocal} from "../../../utils";
+import {CurrenciesTickerStore} from "../../../store/CurennciesTickerStore";
+import {useAsync} from "../../../utils";
+import {Meta} from "../../../utils";
+import {observer} from "mobx-react-lite";
+import CurrenciesMathFloor from "./utils/utils";
 
 
 const CurrenciesTickerFilter = (props: { filterSlide?: any; platform?: any; sizeX?: any; goSearch?: any; onFiltersClick?: any; hideModal: any }) => {
@@ -64,4 +64,4 @@ const CurrenciesTickerFilter = (props: { filterSlide?: any; platform?: any; size
     );
 }
 
-export default CurrenciesTickerFilter;
+export default observer(CurrenciesTickerFilter);

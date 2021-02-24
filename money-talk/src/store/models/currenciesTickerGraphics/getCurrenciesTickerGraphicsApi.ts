@@ -1,5 +1,5 @@
 import {GetCurrenciesTickerGraphicsModel} from "./getCurrenciesTickerGraphics";
-import {CollectionT} from "../../../utils/collection";
+import {CollectionT} from "../../../utils";
 
 export type GetCurrenciesTickerGraphicsApiModel = {
     currency: string,

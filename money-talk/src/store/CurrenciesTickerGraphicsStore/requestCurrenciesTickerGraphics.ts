@@ -1,10 +1,10 @@
-import {ApiResp} from "../../utils/apiTypes";
-import {CollectionT} from "../../utils/collection";
-import {GetCurrenciesTickerGraphicsModel} from "../models/currenciesTickerGraphics/getCurrenciesTickerGraphics";
+import {ApiResp} from "../../utils";
+import {CollectionT} from "../../utils";
+import {GetCurrenciesTickerGraphicsModel} from "../models/currenciesTickerGraphics";
 import axios from "axios";
 import {apiUrls} from "../../config/apiUrls";
-import {normalizeCurrenciesTickerGraphicsToCollection} from "../models/currenciesTickerGraphics/getCurrenciesTickerGraphicsApi";
-import {log} from "../../utils/log";
+import {normalizeCurrenciesTickerGraphicsToCollection} from "../models/currenciesTickerGraphics";
+import {log} from "../../utils";
 
 export const requestCurrenciesTickerGraphics = async (
     organization: string

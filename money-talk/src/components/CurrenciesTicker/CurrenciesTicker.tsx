@@ -1,27 +1,28 @@
-import React, {useState} from "react";
+import * as React from "react";
 import {
-    ANDROID, FormItem,
-    Group, Input, IOS, ModalPage,
-    ModalPageHeader, ModalRoot,
-    Panel, PanelHeader, PanelHeaderBack, PanelHeaderButton, SizeType, Slider, Textarea, View, VKCOM,
+    FormItem,
+    Panel,
+    PanelHeader,
+    PanelHeaderBack,
+    SizeType,
+    Slider,
+    Textarea,
+    View,
+    VKCOM,
     withAdaptivity,
     withPlatform
 } from "@vkontakte/vkui";
-import {Icon24Cancel, Icon24Done} from "@vkontakte/icons";
 
 
 import CurrenciesTickerSearch from "./components/CurrenciesTickerSearch";
-import CurrenciesTickerFilter from "./components/CurrenciesTickerFilter";
+import {Panels} from "../../utils";
 
 
 const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActiveView: any; setTicker: any;}) => {
-    const [activePanel, setActivePanel] = useState('search')
-    const [activeModal, setActiveModal] = useState<null | string>(null)
-    const [filterSlider, setFilterSlider] = React.useState<any>(0);
-    const goHeaderSearch = () => { setActivePanel('header-search') }
-    /*const goHome = () => {setActivePanel('home')}
-    const goSearch = () => { setActivePanel('home') }
-    const hideModal = () => { setActiveModal(null) }*/
+    const [activePanel, setActivePanel] = React.useState<string | any>(Panels.search);
+    const [activeModal, setActiveModal] = React.useState<null | string>(null);
+    const [filterSlider, setFilterSlider] = React.useState<HTMLTextAreaElement | any>(0);
+    const goHeaderSearch = () => { setActivePanel('header-search') };
 
     const { platform } = props;
 
@@ -30,7 +31,7 @@ const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActi
             <Panel id="search">
                 <PanelHeader
                     left={platform !== VKCOM &&
-                    <PanelHeaderBack onClick={() => props.setActiveView('home')}  />}
+                    <PanelHeaderBack onClick={() => props.setActiveView(Panels.home)}  />}
                     separator={props.sizeX === SizeType.REGULAR}
                 >
                     Currencies Ticker
@@ -53,9 +54,8 @@ const CurrenciesTickerComponent = (props: { sizeX?: any; platform?: any; setActi
 
                 <CurrenciesTickerSearch
                     sizeX={props.sizeX}
-                    goHeaderSearch={goHeaderSearch}
                     platform={platform}
-                    onFiltersClick={() => setActiveModal('filters')}
+                    onFiltersClick={() => setActiveModal(Panels.filters)}
                     filterSlide={filterSlider}
                     setActiveView={props.setActiveView}
                     setTicker={props.setTicker}

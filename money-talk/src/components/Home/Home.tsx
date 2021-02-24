@@ -2,8 +2,8 @@ import * as React from 'react';
 import {Card, CardScroll, CellButton, Group, Panel, PanelHeader, platform, Root, View} from "@vkontakte/vkui";
 import {useState} from "react";
 import CurrenciesTicker from "../CurrenciesTicker/CurrenciesTicker";
-import Example from "../CurrenciesTicker/components/CurrenciesTickerGraphics";
 import CurrenciesTickerGraphics from "../CurrenciesTicker/components/CurrenciesTickerGraphics";
+import {Panels} from "../../utils";
 
 
 
@@ -29,8 +29,8 @@ const Home = () => {
                                 </Card>
                                 <Card>
                                     <div style={{ paddingBottom: '66%' }}>
-                                        <CellButton onClick={ () => setActiveView('currenciesTicker') }>
-                                            currenciesTicker
+                                        <CellButton onClick={ () => setActiveView(Panels.currenciesTicker) }>
+                                            Currencies Ticker Table
                                         </CellButton>
                                     </div>
                                 </Card>
@@ -75,7 +75,7 @@ const Home = () => {
                         </CardScroll>
                     </Panel>
                 </View>
-                <View activePanel="card" id="currenciesTicker">
+                <View activePanel="card" id={Panels.currenciesTicker}>
                     <Panel id="card">
                         <CurrenciesTicker setActiveView={setActiveView} setTicker={setTicker}/>
                     </Panel>
@@ -85,8 +85,8 @@ const Home = () => {
                         <PanelHeader>lol</PanelHeader>
                     </Panel>
                 </View>
-                <View activePanel="info" id="info">
-                    <Panel id="info">
+                <View activePanel={Panels.info} id={Panels.info}>
+                    <Panel id={Panels.info}>
                         <CurrenciesTickerGraphics setActiveView={setActiveView} ticker={ticker}/>
                     </Panel>
                 </View>

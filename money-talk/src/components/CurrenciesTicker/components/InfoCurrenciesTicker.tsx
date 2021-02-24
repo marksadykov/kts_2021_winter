@@ -1,7 +1,8 @@
 import * as React from "react";
-import {useLocal} from "../../../utils/useLocal";
-import {useAsync} from "../../../utils/useAsync";
-import {CurrenciesTickerInfoStore} from "../../../store/CurrenciesTickerInfoStore/CurrenciesTickerInfoStore";
+import {useLocal} from "../../../utils";
+import {useAsync} from "../../../utils";
+import {CurrenciesTickerInfoStore} from "../../../store/CurrenciesTickerInfoStore";
+import styles from '../CurrenciesTicker.module.scss';
 import {Avatar, Link} from "@vkontakte/vkui";
 import {AiFillFacebook,
     AiFillGithub,
@@ -9,16 +10,20 @@ import {AiFillFacebook,
     FaTwitter,
     FaTelegram,
     AiFillYoutube} from "react-icons/all";
+import {observer} from "mobx-react-lite";
 
 
-const InfoCurrenciesTicker = (props: { ticker: any}) => {
+const InfoCurrenciesTicker = (props: { ticker: string}) => {
     const store = useLocal(() => new CurrenciesTickerInfoStore(props.ticker))
     useAsync(store.fetch, []);
+    React.useEffect(() => {
+        return () => store.destroy();
+    }, [])
 
     return (
             <>
                 {store.repos.map(data =>
-                <div key={data.id} style={{display: 'inline-flex', justifyContent: 'center', }}>
+                <div key={data.id} className={styles.infoStyle}>
                     <a href={data.twitterUrl} target='_blank'><FaTwitter size={40} /></a>
                     <a href={data.facebookUrl} target="_blank"><AiFillFacebook size={40}/></a>
                     <a href={data.websiteUrl} target='_blank'><Avatar src={data.logoUrl} size={40}/></a>
@@ -33,4 +38,4 @@ const InfoCurrenciesTicker = (props: { ticker: any}) => {
     )
 }
 
-export default InfoCurrenciesTicker;
+export default observer(InfoCurrenciesTicker);

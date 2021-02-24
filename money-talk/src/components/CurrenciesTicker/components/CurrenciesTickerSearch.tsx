@@ -10,19 +10,16 @@ import {
     SizeType, View,
     VKCOM
 } from "@vkontakte/vkui";
-import {Icon24Filter, Icon28AddOutline} from "@vkontakte/icons";
-import {useLocal} from "../../../utils/useLocal";
-import {CurrenciesTickerStore} from "../../../store/CurennciesTickerStore/CurrenciesTickerStore";
-import {useAsync} from "../../../utils/useAsync";
+import {Panels, useLocal} from "../../../utils";
+import {CurrenciesTickerStore} from "../../../store/CurennciesTickerStore";
+import {useAsync} from "../../../utils";
 import {observer} from "mobx-react-lite";
-import CurrenciesMathFloor from "../../../utils/utils";
-import {Meta} from "../../../utils/Meta";
+import {Meta} from "../../../utils";
 import Loading from "./Loading";
-import Example from "./CurrenciesTickerGraphics";
-import CurrenciesTicker from "../CurrenciesTicker";
-import PercentageInformationCurrencies from "./PercentageInformationCurrencies";
+import CurrenciesMathFloor from "./utils/utils";
 
-const CurrenciesTickerSearch = (props: { goHeaderSearch: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined; sizeX: SizeType; filterSlide?: any; platform?: any; goSearch?: any; onFiltersClick?: any; setActiveView:any; setTicker: any}) => {
+
+const CurrenciesTickerSearch = (props: { sizeX: SizeType; filterSlide?: any; platform?: any; goSearch?: any; onFiltersClick?: any; setActiveView:any; setTicker: any}) => {
     const [search, setSearch] = useState('')
     const onChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setSearch(e.target.value);
@@ -42,13 +39,12 @@ const CurrenciesTickerSearch = (props: { goHeaderSearch: ((event: React.MouseEve
             <Search
                 value={search}
                 onChange={onChange}
-                icon={<Icon24Filter/>}
                 onIconClick={onFiltersClick}
             />
             <Group>
                 {store.repos.filter(({name, price}) => name.toLowerCase().indexOf(search.toLowerCase()) > -1 && price > props.filterSlide).map(data =>
                     <List key={data.id} onClick={() => props.setTicker(data.id)} >
-                    <SimpleCell before={<Avatar size={40} src={data.logoUrl}/>} onClick={ () => props.setActiveView('info')}>
+                    <SimpleCell before={<Avatar size={40} src={data.logoUrl}/>} onClick={ () => props.setActiveView(Panels.info)}>
                         {data.name} {CurrenciesMathFloor(data.price)}
                     </SimpleCell>
                     </List>)

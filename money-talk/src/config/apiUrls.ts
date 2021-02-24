@@ -10,7 +10,7 @@ export const apiUrls = {
     },
     graphics: {
         nameResponse: (name: string, ticker: any): string =>
-            apiCurrenciesTicker(`${name}?key=${apiKey}&ids=${ticker}&start=2021-01-10T00%3A00%3A00Z`),
+            apiCurrenciesTicker(`${name}?key=${apiKey}&ids=${ticker}&start=2020-01-01T00%3A00%3A00Z`),
     },
     info: {
         nameResponse: (name: string, ticker: string): string =>

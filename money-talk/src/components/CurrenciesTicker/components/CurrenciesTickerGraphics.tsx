@@ -7,19 +7,24 @@ import {
     withAdaptivity,
     withPlatform,
     Panel,
-    FormItem, Slider, Textarea, View, Button
+    View,
+    Button
 } from "@vkontakte/vkui";
-import {useLocal} from "../../../utils/useLocal";
-import {CurrenciesTickerGraphicsStore} from "../../../store/CurrenciesTickerGraphicsStore/CurrenciesTickerGraphicsStore";
-import {useAsync} from "../../../utils/useAsync";
+import {Panels, useLocal} from "../../../utils";
+import {CurrenciesTickerGraphicsStore} from "../../../store/CurrenciesTickerGraphicsStore";
+import {useAsync} from "../../../utils";
 import Graphics from "./Graphics";
 import InfoCurrenciesTicker from "./InfoCurrenciesTicker";
 import PercentageInformationCurrencies from "./PercentageInformationCurrencies";
+import moment from "moment";
+import {useState} from "react";
+import {observer} from "mobx-react-lite";
 
 const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any; setActiveView: any; ticker: any}) => {
     const store = useLocal(() => new CurrenciesTickerGraphicsStore(props.ticker))
     const [show, setShow] = React.useState(false)
     useAsync(store.fetch, []);
+    console.log(store.repos.map(data => data.timestamps))
 
     const clearData: {date: string, Доллары: number}[] = [
         {
@@ -30,9 +35,10 @@ const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any;
 
     const graphicsData = () => {
         store.repos.forEach((value) => {
-            for (let i = 0; i < value.prices.length; i+=1) {
+            console.log(value.prices.length)
+            for (let i = 0; i < value.prices.length; i++) {
                 const current = {
-                    date: String(value.timestamps[i]),
+                    date: moment(String(value.timestamps[i])).format('LL'),
                     Доллары: Number(Math.floor(Number(value.prices[i]))),
                 };
                 console.log(current)
@@ -42,17 +48,18 @@ const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any;
     }
 
 
+
     return (
-        <View activePanel='info'>
-            <Panel id="info">
+        <View activePanel={Panels.info}>
+            <Panel id={Panels.info}>
                 <PanelHeader
                     left={props.platform !== VKCOM &&
-                    <PanelHeaderBack onClick={() => props.setActiveView('home')} />}
+                    <PanelHeaderBack onClick={() => props.setActiveView(Panels.home)} />}
                     separator={props.sizeX === SizeType.REGULAR}
                 >
                     {props.ticker}
                 </PanelHeader>
-                <Button stretched mode="secondary" size="m" onClick={ () => setShow(!show)}>Показать график</Button>
+                <Button stretched mode="secondary" size="m" onClick={ () => setShow(!show)}>Обновить график</Button>
                 <PercentageInformationCurrencies ticker={props.ticker}/>
                 <Graphics clearData={graphicsData()}/>
                 <InfoCurrenciesTicker ticker={props.ticker}/>
@@ -64,4 +71,4 @@ const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any;
 
 const CurrenciesTickerGraphics = withPlatform(withAdaptivity(CurrenciesTickerGraphicsComponent, { sizeX: true }));
 
-export default CurrenciesTickerGraphics;
+export default observer(CurrenciesTickerGraphics);

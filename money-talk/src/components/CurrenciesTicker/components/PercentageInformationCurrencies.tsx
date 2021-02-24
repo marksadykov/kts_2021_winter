@@ -1,15 +1,16 @@
 import * as React from "react";
-import {useLocal} from "../../../utils/useLocal";
-import {CurrenciesTickerGraphicsStore} from "../../../store/CurrenciesTickerGraphicsStore/CurrenciesTickerGraphicsStore";
-import {useAsync} from "../../../utils/useAsync";
+import {useLocal} from "../../../utils";
+import {CurrenciesTickerGraphicsStore} from "../../../store/CurrenciesTickerGraphicsStore";
+import {useAsync} from "../../../utils";
 
 const PercentageInformationCurrencies = (props: { ticker: any; }) => {
     const store = useLocal(() => new CurrenciesTickerGraphicsStore(props.ticker))
     useAsync(store.fetch, []);
-    const currentValue: any = store.repos.map(data => data.prices[data.prices.length - 2])
-    const previousValue: any = store.repos.map(data => data.prices[data.prices.length - 3])
+    const currentValue: any = store.repos.map(data => data.prices[data.prices.length - 1])
+    const previousValue: any = store.repos.map(data => data.prices[data.prices.length - 2])
     const percentageValue = ((currentValue - previousValue) / previousValue) * 100
     const valueDollars = (currentValue - previousValue)
+    console.log(currentValue, previousValue)
 
     return (
         <>

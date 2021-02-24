@@ -1,8 +1,9 @@
-import {action, computed, makeObservable, observable, runInAction,} from 'mobx';
-import {CollectionT} from "../../utils/collection";
+import {action, computed, IReactionDisposer, makeObservable, observable, reaction, runInAction,} from 'mobx';
+import {CollectionT} from "../../utils";
 import {GetCurrenciesTickerInfoModel} from "../models/info";
-import {Meta} from "../../utils/Meta";
+import {Meta} from "../../utils";
 import {requestCurrenciesTickerInfo} from "./requestCurrenciesTickerInfo";
+import {log} from "../../utils";
 
 
 
@@ -50,5 +51,16 @@ export class CurrenciesTickerInfoStore {
     get repos(): GetCurrenciesTickerInfoModel[] {
         return this._repos.order.map(id => this._repos.entities[id])
     }
+
+    destroy(): void {
+        this.metaChangedReaction();
+    }
+
+    metaChangedReaction: IReactionDisposer = reaction(
+        () => this.meta,
+        (args) => {
+            log('Reaction', args)
+        }
+    )
 
 }

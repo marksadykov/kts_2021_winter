@@ -1,9 +1,9 @@
-import {ApiResp} from "../../utils/apiTypes";
-import {CollectionT} from "../../utils/collection";
+import {ApiResp} from "../../utils";
+import {CollectionT} from "../../utils";
 import {GetCurrenciesTickerInfoModel, normalizeCurrenciesTickerInfoToCollection} from "../models/info";
 import axios from "axios";
 import {apiUrls} from "../../config/apiUrls";
-import {log} from "../../utils/log";
+import {log} from "../../utils";
 
 export const requestCurrenciesTickerInfo = async (
     organization: string

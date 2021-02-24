@@ -5,12 +5,7 @@ import { normalizeWorldModel } from '../models';
 export const requestWorldStore = async (start: string, end: string) => {
     try {
         const response = await axios(
-                {
-                    url: apiUrls.world(start, end),
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                    }
-                }
+            apiUrls.world(start, end)
         );
         return {
             isError: false,

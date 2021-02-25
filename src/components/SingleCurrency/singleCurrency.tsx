@@ -30,7 +30,7 @@ const SingleCurrency = (props: {
                 padding: 0,
             }}
             before={
-                <Avatar size={56}
+                <Avatar size={50}
                         mode="image"
                         src={props.logoUrl}
                 />

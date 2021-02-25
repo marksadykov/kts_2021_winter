@@ -22,6 +22,8 @@ import SingleCurrency from "../SingleCurrency";
 import {Panels} from "../../utils";
 import CurrenciesTickerGraphics from "../CurrenciesTicker/components/CurrenciesTickerGraphics";
 import CurrenciesTicker from "../CurrenciesTicker/CurrenciesTicker";
+import SingleCurrencyPage from "../SingleCurrencyPage";
+import { bitcoinHistory } from  '../TextMock/text';
 
 const Home = () => {
 
@@ -54,21 +56,17 @@ const Home = () => {
                             <Card>
 
                             </Card>
-                            <Card>
-                            </Card>
-                            <Card>
-                            </Card>
-                            <Card>
-                            </Card>
                         </CardScroll>
                     </Group>
                     <CardScroll size="s">
                         <Card>
-                            <SingleCurrency
-                                symbol="BTC"
-                                name="Bitcoin"
-                                logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/btc.svg"
-                            />
+                            <CellButton onClick={ () => setActiveView('single') }>
+                                <SingleCurrency
+                                    symbol="BTC"
+                                    name="Bitcoin"
+                                    logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/btc.svg"
+                                />
+                            </CellButton>
                         </Card>
                         <Card>
                             <SingleCurrency
@@ -90,15 +88,6 @@ const Home = () => {
                                 name="Monero"
                                 logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/xmr.svg"
                             />
-                        </Card>
-                    </CardScroll>
-                    <CardScroll size="l">
-                        <Card>
-                            <div>l</div>
-                        </Card>
-                        <Card>
-                        </Card>
-                        <Card>
                         </Card>
                     </CardScroll>
                     <Group description="в Долларах">
@@ -124,6 +113,22 @@ const Home = () => {
             <View activePanel={Panels.info} id={Panels.info}>
                 <Panel id={Panels.info}>
                     <CurrenciesTickerGraphics setActiveView={setActiveView} ticker={ticker}/>
+                </Panel>
+            </View>
+            <View activePanel={'single'} id={'single'}>
+                <Panel id={'single'}>
+                    <SingleCurrencyPage
+                        setActiveView={setActiveView}
+                        nameOfCurrency="Bitcoin"
+                        date="3 января 2009"
+                        developer="Сатоси Накамото"
+                        version="0.21.0 (15 января 2021)"
+                        wideLogo="https://cdn21.img.ria.ru/images/151248/17/1512481729_0:122:3210:1928_1920x0_80_0_0_6302ec9a5e091a22bb71698a1c7869e7.jpg"
+                        russianName="Биткоин"
+                        value="49 513,30"
+                        longLogo="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fdam%2Fimageserve%2F908633080%2F960x0.jpg%3Ffit%3Dscale"
+                        history={bitcoinHistory}
+                    />
                 </Panel>
             </View>
         </Root>);

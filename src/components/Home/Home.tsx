@@ -23,7 +23,7 @@ import {Panels} from "../../utils";
 import CurrenciesTickerGraphics from "../CurrenciesTicker/components/CurrenciesTickerGraphics";
 import CurrenciesTicker from "../CurrenciesTicker/CurrenciesTicker";
 import SingleCurrencyPage from "../SingleCurrencyPage";
-import { bitcoinHistory, ethereumHistory } from  '../TextMock/text';
+import { bitcoinHistory, ethereumHistory, litecoinHistory } from  '../TextMock/text';
 
 const Home = () => {
 
@@ -78,11 +78,13 @@ const Home = () => {
                             </CellButton>
                         </Card>
                         <Card>
-                            <SingleCurrency
-                                symbol="LTC"
-                                name="Litecoin"
-                                logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/ltc.svg"
-                            />
+                            <CellButton onClick={ () => setActiveView('litecoin') }>
+                                <SingleCurrency
+                                    symbol="LTC"
+                                    name="Litecoin"
+                                    logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/ltc.svg"
+                                />
+                            </CellButton>
                         </Card>
                         <Card>
                             <SingleCurrency
@@ -146,6 +148,22 @@ const Home = () => {
                         value="1 586,51"
                         longLogo="https://www.financemagnates.com/wp-content/uploads/2020/12/Ethereum.jpg"
                         history={ethereumHistory}
+                    />
+                </Panel>
+            </View>
+            <View activePanel={'litecoin'} id={'litecoin'}>
+                <Panel id={'litecoin'}>
+                    <SingleCurrencyPage
+                        setActiveView={setActiveView}
+                        nameOfCurrency="Litecoin"
+                        date="12 октября 2011"
+                        developer="	Чарльз Ли"
+                        version="0.18.1 (11 июня 2020)"
+                        wideLogo="https://masterthecrypto.com/wp-content/uploads/2019/10/litecoin-price-prediction.jpg"
+                        russianName="Лайткоин"
+                        value="193,52"
+                        longLogo="https://coinforce.ru/wp-content/uploads/2019/08/1-%D0%A6%D0%B5%D0%BD%D1%8B-%D0%BD%D0%B0-Litecoin-%D0%BE%D1%81%D1%82%D0%B0%D0%BD%D0%B0%D0%B2%D0%BB%D0%B8%D0%B2%D0%B0%D1%8E%D1%82%D1%81%D1%8F-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5-%D1%82%D0%BE%D0%B3%D0%BE-%D0%BA%D0%B0%D0%BA-%D0%BE%D0%BD%D0%B8-%D0%B4%D0%B5%D0%BB%D1%8F%D1%82%D1%81%D1%8F-%D0%BF%D0%BE%D0%BF%D0%BE%D0%BB%D0%B0%D0%BC.png"
+                        history={litecoinHistory}
                     />
                 </Panel>
             </View>

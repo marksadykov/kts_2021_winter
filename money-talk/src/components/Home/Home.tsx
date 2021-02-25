@@ -17,17 +17,10 @@ import iconExchange from './icons/exchange.svg'
 import Change from "../Change";
 import Chart from "../Chart";
 import SingleCurrency from "../SingleCurrency";
-import {useLocalStore} from "../../utils/useLocal";
-import {useAsync} from "../../utils/useAsync";
-import singleCurrencyStore from "../../store/singleCurrencyStore";
 
 const Home = () => {
 
     const [activeView, setActiveView] = React.useState('home');
-
-    const store = useLocalStore(() => new singleCurrencyStore(['BTC','ETH', 'LTC', 'XMR']));
-
-    useAsync(store.fetch, []);
 
     return (
             <Root activeView={activeView}>
@@ -59,13 +52,32 @@ const Home = () => {
                         </Group>
                         <CardScroll size="s">
                             <Card>
-                                <SingleCurrency />
+                                <SingleCurrency
+                                    symbol="BTC"
+                                    name="Bitcoin"
+                                    logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/btc.svg"
+                                />
                             </Card>
                             <Card>
+                                <SingleCurrency
+                                    symbol="ETH"
+                                    name="Ethereum"
+                                    logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/eth.svg"
+                                />
                             </Card>
                             <Card>
+                                <SingleCurrency
+                                    symbol="LTC"
+                                    name="Litecoin"
+                                    logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/ltc.svg"
+                                />
                             </Card>
                             <Card>
+                                <SingleCurrency
+                                    symbol="XMR"
+                                    name="Monero"
+                                    logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/xmr.svg"
+                                />
                             </Card>
                         </CardScroll>
                         <CardScroll size="l">

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { apiUrls } from '../../config/apiUrls';
-import {normalizeSingleCurrencyModel} from "../models/singleCurrency";
+import {normalizeSingleCurrencyModel} from "../models/SingleCurrency";
 
 export const requestSingleCurrencyStore = async (symbols: string[]) => {
     try {

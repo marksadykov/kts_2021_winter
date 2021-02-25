@@ -1,7 +1,7 @@
 import {observable, action, computed, makeObservable, runInAction, IReactionDisposer, reaction} from 'mobx';
 import { Meta } from '../../utils/meta';
 import { ILocalStore } from '../../utils/useLocal';
-import {singleCurrencyModel} from "../models/singleCurrency";
+import {singleCurrencyModel} from "../models/SingleCurrency";
 import {requestSingleCurrencyStore} from "./requestCurrencyStore";
 
 export default class singleCurrencyStore implements ILocalStore {

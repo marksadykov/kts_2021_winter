@@ -2,14 +2,25 @@ import * as React from 'react';
 import {observer} from 'mobx-react-lite';
 import {Avatar, Banner} from "@vkontakte/vkui";
 
-// import { useAsync } from '../../utils/useAsync';
-// import { useLocalStore } from '../../utils/useLocal';
+import { useAsync } from '../../utils/useAsync';
+import { useLocalStore } from '../../utils/useLocal';
+import singleCurrencyStore from "../../store/singleCurrencyStore";
 
-const singleCurrency = () => {
-
-    // const store = useLocalStore(() => new CurrencyStore());
+const SingleCurrency = (props: {
+    symbol: string;
+    name: string;
+    logoUrl: string;
+}) => {
+    // const store = useLocalStore(() => new singleCurrencyStore([props.symbol]));
     //
     // useAsync(() => store.fetch(), []);
+    //
+    // React.useEffect(
+    //     () => {
+    //         console.log(store.currency);
+    //     },
+    //     [store.currency],
+    // );
 
     return (
 
@@ -19,15 +30,15 @@ const singleCurrency = () => {
                 padding: 0,
             }}
             before={
-                <Avatar size={70}
+                <Avatar size={56}
                         mode="image"
-                        src="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/btc.svg"
+                        src={props.logoUrl}
                 />
             }
-            header="BTC"
-            subheader="Bitcoin"
+            header={props.symbol}
+            subheader={props.name}
         />
     )
-}
+};
 
-export default observer(singleCurrency);
+export default observer(SingleCurrency);

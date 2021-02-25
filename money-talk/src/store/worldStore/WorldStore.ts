@@ -1,6 +1,6 @@
 import {observable, action, computed, makeObservable, runInAction, IReactionDisposer, reaction} from 'mobx';
 import { worldModel } from '../models';
-import { Meta } from '../../utils/meta';
+import { Meta } from '../../utils/Meta';
 import { requestWorldStore } from "./requestWorldStore";
 import { ILocalStore } from '../../utils/useLocal';
 

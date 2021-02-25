@@ -1,5 +1,5 @@
 import {observable, action, computed, makeObservable, runInAction, IReactionDisposer, reaction} from 'mobx';
-import { Meta } from '../../utils/meta';
+import { Meta } from '../../utils/Meta';
 import { ILocalStore } from '../../utils/useLocal';
 import {singleCurrencyModel} from "../models/SingleCurrency";
 import {requestSingleCurrencyStore} from "./requestCurrencyStore";

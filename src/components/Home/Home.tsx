@@ -23,7 +23,7 @@ import {Panels} from "../../utils";
 import CurrenciesTickerGraphics from "../CurrenciesTicker/components/CurrenciesTickerGraphics";
 import CurrenciesTicker from "../CurrenciesTicker/CurrenciesTicker";
 import SingleCurrencyPage from "../SingleCurrencyPage";
-import { bitcoinHistory, ethereumHistory, litecoinHistory } from  '../TextMock/text';
+import { bitcoinHistory, ethereumHistory, litecoinHistory, moneroHistory } from  '../TextMock/text';
 
 const Home = () => {
 
@@ -52,9 +52,6 @@ const Home = () => {
                                         className={styles.svgicon}
                                     />
                                 </CellButton>
-                            </Card>
-                            <Card>
-
                             </Card>
                         </CardScroll>
                     </Group>
@@ -87,11 +84,13 @@ const Home = () => {
                             </CellButton>
                         </Card>
                         <Card>
-                            <SingleCurrency
-                                symbol="XMR"
-                                name="Monero"
-                                logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/xmr.svg"
-                            />
+                            <CellButton onClick={ () => setActiveView('monero') }>
+                                <SingleCurrency
+                                    symbol="XMR"
+                                    name="Monero"
+                                    logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/xmr.svg"
+                                />
+                            </CellButton>
                         </Card>
                     </CardScroll>
                     <Group description="в Долларах">
@@ -164,6 +163,22 @@ const Home = () => {
                         value="193,52"
                         longLogo="https://coinforce.ru/wp-content/uploads/2019/08/1-%D0%A6%D0%B5%D0%BD%D1%8B-%D0%BD%D0%B0-Litecoin-%D0%BE%D1%81%D1%82%D0%B0%D0%BD%D0%B0%D0%B2%D0%BB%D0%B8%D0%B2%D0%B0%D1%8E%D1%82%D1%81%D1%8F-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5-%D1%82%D0%BE%D0%B3%D0%BE-%D0%BA%D0%B0%D0%BA-%D0%BE%D0%BD%D0%B8-%D0%B4%D0%B5%D0%BB%D1%8F%D1%82%D1%81%D1%8F-%D0%BF%D0%BE%D0%BF%D0%BE%D0%BB%D0%B0%D0%BC.png"
                         history={litecoinHistory}
+                    />
+                </Panel>
+            </View>
+            <View activePanel={'monero'} id={'monero'}>
+                <Panel id={'monero'}>
+                    <SingleCurrencyPage
+                        setActiveView={setActiveView}
+                        nameOfCurrency="Monero"
+                        date="18 апреля 2014"
+                        developer="Riccardo Spagni"
+                        version="0.17.1.9 (8 января 2021)"
+                        wideLogo="https://ttrcoin.com/data/casinopro/201708211058371455299627.jpg"
+                        russianName="Монеро"
+                        value="205,319"
+                        longLogo="https://ciphertrace.com/wp-content/uploads/2020/11/Monero-feature.png"
+                        history={moneroHistory}
                     />
                 </Panel>
             </View>

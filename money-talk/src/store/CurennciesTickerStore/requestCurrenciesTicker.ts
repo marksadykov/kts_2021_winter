@@ -9,8 +9,13 @@ export const requestCurrenciesTicker = async (
     organization: string
 ): Promise<ApiResp<CollectionT<number, GetCurrenciesTickerModel>>> => {
     try {
+        const delay = (ms = 5000) => new Promise((r) => setTimeout(r, ms));
+        await delay();
         const response = await axios(
-            apiUrls.currencyTicker.nameResponse(organization)
+            {
+                url: apiUrls.currencyTicker.nameResponse(organization),
+                timeout: 10000
+            }
         );
         return {
             isError: false,

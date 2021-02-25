@@ -24,7 +24,7 @@ const CurrenciesTickerGraphicsComponent = (props: { sizeX?: any; platform?: any;
     const store = useLocal(() => new CurrenciesTickerGraphicsStore(props.ticker))
     const [show, setShow] = React.useState(false)
     useAsync(store.fetch, []);
-    console.log(store.repos.map(data => data.timestamps))
+
 
     const clearData: {date: string, Доллары: number}[] = [
         {

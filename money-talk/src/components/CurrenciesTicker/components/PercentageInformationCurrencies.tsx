@@ -13,6 +13,7 @@ const PercentageInformationCurrencies = (props: { ticker: any; }) => {
     console.log(currentValue, previousValue)
 
     return (
+
         <>
             {!isNaN(percentageValue) && Math.sign(percentageValue) === 1 &&
             <div style={{textAlign: 'center', marginTop: '20px', color: 'green'}}>{valueDollars.toFixed(3)} $

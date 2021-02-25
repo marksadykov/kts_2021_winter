@@ -6,12 +6,14 @@ import {
     CartesianGrid,
     Line, Legend, YAxis, Area,
 } from 'recharts';
+import useWindowSize from "../../../utils/useWindowSize";
 
 const Graphics = (props: any) => {
+    const screenWidth = useWindowSize();
 
     return (
         <div>
-            <AreaChart width={350} height={450} data={props.clearData}
+            <AreaChart width={screenWidth.width-40} height={450} data={props.clearData}
                        margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
                 <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">

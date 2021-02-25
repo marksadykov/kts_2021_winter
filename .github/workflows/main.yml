@@ -12,10 +12,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Heroku deploy
         env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY.HEROKU_API_KEY }}
+          HEROKU_API_KEY: ${{ HEROKU_API_KEY }}
         run: |
           echo 123
-          echo HEROKU_API_KEY
           heroku container:login
           heroku container:push -a ktswinter web
           heroku container:release -a ktswinter web

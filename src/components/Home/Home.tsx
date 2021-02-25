@@ -23,7 +23,7 @@ import {Panels} from "../../utils";
 import CurrenciesTickerGraphics from "../CurrenciesTicker/components/CurrenciesTickerGraphics";
 import CurrenciesTicker from "../CurrenciesTicker/CurrenciesTicker";
 import SingleCurrencyPage from "../SingleCurrencyPage";
-import { bitcoinHistory } from  '../TextMock/text';
+import { bitcoinHistory, ethereumHistory } from  '../TextMock/text';
 
 const Home = () => {
 
@@ -60,7 +60,7 @@ const Home = () => {
                     </Group>
                     <CardScroll size="s">
                         <Card>
-                            <CellButton onClick={ () => setActiveView('single') }>
+                            <CellButton onClick={ () => setActiveView('bitcoin') }>
                                 <SingleCurrency
                                     symbol="BTC"
                                     name="Bitcoin"
@@ -69,11 +69,13 @@ const Home = () => {
                             </CellButton>
                         </Card>
                         <Card>
-                            <SingleCurrency
-                                symbol="ETH"
-                                name="Ethereum"
-                                logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/eth.svg"
-                            />
+                            <CellButton onClick={ () => setActiveView('ethereum') }>
+                                <SingleCurrency
+                                    symbol="ETH"
+                                    name="Ethereum"
+                                    logoUrl="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/eth.svg"
+                                />
+                            </CellButton>
                         </Card>
                         <Card>
                             <SingleCurrency
@@ -115,8 +117,8 @@ const Home = () => {
                     <CurrenciesTickerGraphics setActiveView={setActiveView} ticker={ticker}/>
                 </Panel>
             </View>
-            <View activePanel={'single'} id={'single'}>
-                <Panel id={'single'}>
+            <View activePanel={'bitcoin'} id={'bitcoin'}>
+                <Panel id={'bitcoin'}>
                     <SingleCurrencyPage
                         setActiveView={setActiveView}
                         nameOfCurrency="Bitcoin"
@@ -128,6 +130,22 @@ const Home = () => {
                         value="49 513,30"
                         longLogo="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fdam%2Fimageserve%2F908633080%2F960x0.jpg%3Ffit%3Dscale"
                         history={bitcoinHistory}
+                    />
+                </Panel>
+            </View>
+            <View activePanel={'ethereum'} id={'ethereum'}>
+                <Panel id={'ethereum'}>
+                    <SingleCurrencyPage
+                        setActiveView={setActiveView}
+                        nameOfCurrency="Ethereum"
+                        date="30 июля 2015"
+                        developer="Виталик Бутерин"
+                        version="1.7.3 (21 ноября 2017)"
+                        wideLogo="https://www.startupnedir.com/wp-content/uploads/2018/10/ethereum-1.png"
+                        russianName="Эфириум"
+                        value="1 586,51"
+                        longLogo="https://www.financemagnates.com/wp-content/uploads/2020/12/Ethereum.jpg"
+                        history={ethereumHistory}
                     />
                 </Panel>
             </View>

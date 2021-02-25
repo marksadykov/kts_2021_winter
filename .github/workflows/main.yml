@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Heroku deploy
         env:
-          HEROKU_API_KEY: ${{ HEROKU_API_KEY }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           echo 123
           heroku container:login

@@ -16,5 +16,5 @@ jobs:
         run: |
           echo 123
           heroku container:login
-          heroku container:push -a deploy-frontend-app web
-          heroku container:release -a deploy-frontend-app web
+          heroku container:push -a ktswinter web
+          heroku container:release -a ktswinter web

@@ -13,7 +13,8 @@ import {
 
 import styles from './Home.module.scss';
 import {ReactSVG} from "react-svg";
-import iconExchange from './icons/exchange.svg'
+import iconExchange from './icons/exchange.svg';
+import iconIncrease from './icons/increase.png';
 import Change from "../Change";
 import Chart from "../Chart";
 import SingleCurrency from "../SingleCurrency";
@@ -43,13 +44,15 @@ const Home = () => {
                                 </CellButton>
                             </Card>
                             <Card>
-                                <div style={{ paddingBottom: '66%' }}>
-                                    <CellButton onClick={ () => setActiveView(Panels.currenciesTicker) }>
-                                        Currencies Ticker Table
-                                    </CellButton>
-                                </div>
+                                <CellButton style={{ height: 150 }} onClick={ () => setActiveView(Panels.currenciesTicker) }>
+                                    <img
+                                        src={iconIncrease}
+                                        className={styles.svgicon}
+                                    />
+                                </CellButton>
                             </Card>
                             <Card>
+
                             </Card>
                             <Card>
                             </Card>

@@ -10,7 +10,7 @@ export const requestCurrenciesTickerGraphics = async (
     organization: string
     , ticker: any): Promise<ApiResp<CollectionT<number, GetCurrenciesTickerGraphicsModel>>> => {
     try {
-        const delay = (ms = 8000) => new Promise((r) => setTimeout(r, ms));
+        const delay = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
         await delay();
         const response = await axios({
             url: apiUrls.graphics.nameResponse(organization, ticker),

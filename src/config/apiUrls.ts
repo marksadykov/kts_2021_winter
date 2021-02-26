@@ -2,7 +2,6 @@ const config = {
     apiKey: '2c3232c58c3be78c9ae8c6e265a51a41',
     // apiKey: 'demo-6410726746980cead2a17c9db9ef29af',
     // apiKey: '14992dc0b5275f114015307b2db6a605',
-    // baseUrl: 'https://ktswinter.herokuapp.com/api/',
     baseUrl: '/api/nomics/',
 };
 

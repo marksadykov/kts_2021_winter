@@ -3,7 +3,7 @@ const config = {
     // apiKey: 'demo-6410726746980cead2a17c9db9ef29af',
     // apiKey: '14992dc0b5275f114015307b2db6a605',
     // baseUrl: 'https://ktswinter.herokuapp.com/api/',
-    baseUrl: 'localhost:9001/api/nomics/',
+    baseUrl: '/api/nomics/',
 };
 
 const currencyApi = (symbols: string[]): string =>
